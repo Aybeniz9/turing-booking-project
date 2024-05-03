@@ -1,5 +1,9 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Main {
 
 
@@ -8,4 +12,8 @@ public class Main {
                 "   ");
     }
 
+    public static void getFile(String source) throws IOException {
+        File file = new File(source);
+        FileWriter fr = new FileWriter(file);
+    }
 }
