@@ -8,7 +8,7 @@ public class BookingController {
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
-    public String ShowTheFlightInfo(){
+    public String showTheFlightInfo(){
         return null;
     }
     public String cancelBooking(){
