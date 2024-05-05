@@ -26,4 +26,5 @@ public abstract class BookingDao implements DAO<BookingEntity> {
     public Optional<BookingEntity> findOneBy(Predicate<BookingEntity> predicate) {
         return Optional.empty();
     }
+
 }
