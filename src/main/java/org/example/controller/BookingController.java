@@ -17,5 +17,8 @@ public class BookingController {
     public String myFlights(){
         return null;
     }
+    public String creatBooking(){
+        return null;
+    }
 
 }
