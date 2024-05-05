@@ -1,4 +1,13 @@
 package org.example.service.impl;
 
-public class BookingServiceİmpl {
+import org.example.dao.BookingDao;
+import org.example.service.BookingService;
+
+public class BookingServiceİmpl implements BookingService {
+    private final BookingDao bookingDao;
+
+    public BookingServiceİmpl(BookingDao bookingDao) {
+        this.bookingDao = bookingDao;
+    }
 }
+
