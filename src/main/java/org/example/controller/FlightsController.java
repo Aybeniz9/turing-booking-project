@@ -1,5 +1,5 @@
 package org.example.controller;
-import org.example.service.BookingService;
+
 import org.example.service.FlightsService;
 
 public class FlightsController {
@@ -13,6 +13,9 @@ public class FlightsController {
         return null;
     }
     public String SearchBookFlight(){
+        return null;
+    }
+    public String showTheFlightInfo(){
         return null;
     }
 
