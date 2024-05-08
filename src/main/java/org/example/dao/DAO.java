@@ -1,15 +1,16 @@
 package org.example.dao;
 
+import java.util.*;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 public interface DAO<T> {
 
-    T save(T t);
-
-
-    Collection<T> getAll();
+    void save(List<T> t);
+    void delete(T t);
+    Collection<T> getAllFLights();
+    Collection<T> findById();
 
     Optional<T> findOneBy(Predicate<T> predicate);
 

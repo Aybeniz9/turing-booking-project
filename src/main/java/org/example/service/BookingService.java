@@ -7,7 +7,7 @@ public interface BookingService {
 
     BookingDto searchBooking(BookingDto bookingDto);
 
-    BookingDto cancelBooking(BookingDto bookingDto);
+    BookingDto cancelBooking(BookingDto id);
 
     BookingDto myFlights(BookingDto bookingDto);
 

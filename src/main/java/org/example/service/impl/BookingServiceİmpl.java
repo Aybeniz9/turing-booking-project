@@ -8,13 +8,13 @@ import org.example.service.BookingService;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 public class BookingServiceİmpl extends BookingDao implements BookingService {
     private final BookingDao bookingDao;
-    private List<BookingDto> bookings;
 
     public BookingServiceİmpl(BookingDao bookingDao) {
         this.bookingDao = bookingDao;
-        this.bookings=new ArrayList<>();
+        this.bookings = new ArrayList<>();
     }
 
     @Override
@@ -37,25 +37,25 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
     @Override
     public BookingDto searchBooking(BookingDto bookingDto) {
         for (BookingDto booking : bookings) {
-            if (booking.equals(bookingDto)){
+            if (booking.equals(bookingDto)) {
                 return booking;
+            }
         }
-    }
         return null;
-}
+    }
 
     @Override
-public BookingDto cancelBooking(BookingDto bookingDto) {
-    Iterator<BookingDto> iterator = bookings.iterator();
-    while (iterator.hasNext()) {
-        BookingDto booking = iterator.next();
-        if (booking.equals(bookingDto)) {
-            iterator.remove();
-            return booking;
+    public BookingDto cancelBooking(BookingDto bookingDto) {
+        Iterator<BookingDto> iterator = bookings.iterator();
+        while (iterator.hasNext()) {
+            BookingDto booking = iterator.next();
+            if (booking.equals(bookingDto)) {
+                iterator.remove();
+                return booking;
+            }
         }
+        return null;
     }
-    return null;
-}
 
     @Override
     public BookingDto myFlights(BookingDto bookingDto) {
