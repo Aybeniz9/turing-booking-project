@@ -2,7 +2,7 @@ package org.example.controller;
 
 import org.example.service.FlightsService;
 
-public class FlightsController {
+public class FlightsController  {
 
     private final FlightsService flightsService;
     public FlightsController(FlightsService flightsService) {
