@@ -9,6 +9,9 @@ public class FlightsEntity {
     private int freeSpaces;
     private String destination;
 
+    public FlightsEntity() {
+    }
+
     public FlightsEntity(String id, LocalDateTime date, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = date;

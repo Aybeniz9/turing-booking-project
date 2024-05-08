@@ -9,10 +9,11 @@ public class FlightsController {
         this.flightsService = flightsService;
     }
 
-    public String OnlineBoard(){
+
+    public String displayOnlineBoard(){
         return null;
     }
-    public String SearchBookFlight(){
+    public String searchBookFlight(){
         return null;
     }
     public String showTheFlightInfo(){

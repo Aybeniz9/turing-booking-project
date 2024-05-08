@@ -10,6 +10,7 @@ public class BookingController {
     }
 
     public String cancelBooking(){
+        bookingService.cancelBooking();
         return null;
     }
     public String myFlights(){
