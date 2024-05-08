@@ -4,7 +4,7 @@ import java.util.Objects;
 
 
 public class FlightsEntity {
-    private String id;
+    private int id;
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
@@ -12,18 +12,18 @@ public class FlightsEntity {
     public FlightsEntity() {
     }
 
-    public FlightsEntity(String id, LocalDateTime date, int freeSpaces, String destination) {
+    public FlightsEntity(int id, LocalDateTime date, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = date;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

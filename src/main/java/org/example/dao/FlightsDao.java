@@ -5,6 +5,7 @@ import org.example.model.FlightsEntity;
 import java.io.*;
 import java.util.*;
 
+
 public class FlightsDao implements DAO<FlightsEntity> {
     private String filePath;
 
@@ -17,8 +18,8 @@ public class FlightsDao implements DAO<FlightsEntity> {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (FlightsEntity flight : entities) {
                 writer.println
-                                (flight.getId() + "," + flight.getDestination() + "," +
-                        flight.getDate() + "," + flight.getFreeSpaces());
+                        (flight.getId() + "," + flight.getDestination() + "," +
+                                flight.getDate() + "," + flight.getFreeSpaces());
             }
             System.out.println("Flights saved successfully.");
         } catch (IOException e) {
@@ -26,7 +27,8 @@ public class FlightsDao implements DAO<FlightsEntity> {
         }
     }
 
-    public void delete(String id) {
+    @Override
+    public void delete(int id) {
         Iterator<FlightsEntity> iterator = getAllFLights().iterator();
         while (iterator.hasNext()) {
             FlightsEntity flight = iterator.next();

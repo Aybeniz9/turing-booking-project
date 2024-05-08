@@ -8,11 +8,14 @@ import java.util.function.Predicate;
 public interface DAO<T> {
 
     void save(List<T> t);
-    void delete(T t);
-    Collection<T> getAllFLights();
+
+    void delete(int id);
+
     Collection<T> findById();
+
+    Collection<T> getAll();
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
-  Collection<T> findAllBy(Predicate<T> predicate);
+    Collection<T> findAllBy(Predicate<T> predicate);
 }
