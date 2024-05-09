@@ -31,59 +31,58 @@ public class BookingController {
        Scanner scanner=new Scanner(System.in);
         System.out.println("Input passenger name");
         String passenger_name= scanner.nextLine();
-        return null;
+        return null;// to do some changes
     }
 
-    public void SearchBookFlight(){
-        Scanner scanner=new Scanner(System.in);
-        try {
-            System.out.println("Enter destination:");
-            String destination = scanner.nextLine();
-
-            System.out.printf("Enter date (YYYY-MM-DD):");
-            String date = scanner.nextLine();
-
-            System.out.println("Enter number of passengers:");
-            int numPassengers = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
-            List<FlightsEntity> availableFlights = flightController.searchFlights(destination, date, numPassengers);
-
-            if (availableFlights.isEmpty()) {
-                System.out.println("No flights available for the given criteria.");
-            } else {
-                System.out.println("Available flights:");
-                for (int i = 0; i < availableFlights.size(); i++) {
-                    FlightsEntity flight = availableFlights.get(i);
-                    System.out.println((i + 1) + ". " + flight.toString());
-                }
-
-                System.out.println("Enter the serial number of the flight to book (0 to return to main menu):");
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                if (choice == 0) {
-
-                } else if (choice > 0 && choice <= availableFlights.size()) {
-                    // Book the selected flight
-                    Flight selectedFlight = availableFlights.get(choice - 1);
-                    System.out.println("Enter passenger names (comma-separated):");
-                    String passengerNamesInput = scanner.nextLine();
-                    String[] passengerNames = passengerNamesInput.split(",");
-                    boolean booked = bookingController.bookFlight(selectedFlight.getId(), passengerNames);
-                    if (booked) {
-                        System.out.println("Flight booked successfully!");
-                    } else {
-                        System.out.println("Failed to book the flight. Please try again.");
-                    }
-                } else {
-                    System.out.println("Invalid choice.");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void searchBooking(){
+//        Scanner scanner=new Scanner(System.in);
+//        try {
+//            System.out.println("Enter destination:");
+//            String destination = scanner.nextLine();
+//
+//            System.out.println("Enter date (YYYY-MM-DD):");
+//            String date = scanner.nextLine();
+//
+//            System.out.println("Enter number of passengers:");
+//            int numPassengers = scanner.nextInt();
+//            scanner.nextLine();
+//
+//            List<FlightsEntity> availableFlights = myFlights()flightcontroller.serarch(destination, date, numPassengers);
+//
+//            if (availableFlights.isEmpty()) {
+//                System.out.println("No flights available for the given criteria.");
+//            } else {
+//                System.out.println("Available flights:");
+//                for (int i = 0; i < availableFlights.size(); i++) {
+//                    FlightsEntity flight = availableFlights.get(i);
+//                    System.out.println((i + 1) + "." + flight.toString());
+//                }
+//
+//                System.out.println("Enter the serial number of the flight to book (0 to return to main menu):");
+//                int choice = scanner.nextInt();
+//                scanner.nextLine();
+//                if (choice == 0) {
+//                    return;
+//                } else if (choice > 0 && choice <= availableFlights.size()) {
+//
+//                    FlightsEntity selectedFlight = availableFlights.get(choice - 1);
+//                    System.out.println("Enter passenger names");
+//                    String passengerNamesInput = scanner.nextLine();
+//                    String[] passengerNames = passengerNamesInput.split(",");
+//                    boolean booked = bookingController.bookFlight(selectedFlight.getId(), passengerNames);
+//                    if (booked) {
+//                        System.out.println("Flight booked successfully!");
+//                    } else {
+//                        System.out.println("Failed to book the flight. Please try again.");
+//                    }
+//                } else {
+//                    System.out.println("Invalid choice.");
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("An error occurred: " + e.getMessage());
+//            e.printStackTrace();
+//        }
     }
     public String creatBooking(){
         return null;

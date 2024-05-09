@@ -30,8 +30,7 @@ public class FlightsFileDao  extends FlightsDao {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(","); // Assuming CSV format: id,destination,dateTime,availableSeats
-                // Assuming Flight constructor accepts id, destination, dateTime (String), and availableSeats (int)
+                String[] parts = line.split(",");
                 FlightsEntity flight = new FlightsEntity(parts[0], parts[1], LocalDateTime.parse(parts[2]), Integer.parseInt(parts[3]));
                 flights.add(flight);
             }

@@ -38,7 +38,7 @@ public class BookingManagmentApp {
                 switch (choice) {
                     case 1:
 //                        displayOnlineBoard();
-                        bookingController.onlineBoard
+                        bookingController.online
                         break;
                     case 2:
                         //displayFlightInfo();

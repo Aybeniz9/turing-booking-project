@@ -1,12 +1,16 @@
 package org.example.service.impl;
 
 import org.example.dao.BookingDao;
-import org.example.model.BookingEntity;
+import org.example.dao.impl.FlightsFileDao;
+import org.example.entities.BookingEntity;
+import org.example.entities.FlightsEntity;
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 public class BookingServiceİmpl extends BookingDao implements BookingService {
     private final BookingDao bookingDao;
@@ -32,15 +36,17 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
                 savedEntity.getFlight_id()
         );
     }
+    public BookingDto<FlightsEntity> searchFlights(String destination, LocalDate date, int numPassengers) {
+        // Retrieve all flights from DAO
+        List<Flight> allFlights = FlightsFileDao.getAllFlights();
 
-    @Override
-    public BookingDto searchBooking(BookingDto bookingDto) {
-        for (BookingDto booking : bookings) {
-            if (booking.equals(bookingDto)) {
-                return booking;
-            }
-        }
-        return null;
+        List<Flight> availableFlights = allFlights.stream()
+                .filter(flight -> flight.getDestination().equalsIgnoreCase(destination) &&
+                        flight.getDate().isEqual(date) &&
+                        flight.getAvailableSeats() >= numPassengers)
+                .collect(Collectors.toList());
+
+        return availableFlights;
     }
 
     @Override
