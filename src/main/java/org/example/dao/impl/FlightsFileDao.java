@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.io.*;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class FlightsFileDao  extends FlightsDao {
     private  static  final  String RESOURCE_PATH="src/main/java/org/example/resource";
@@ -18,12 +21,13 @@ public class FlightsFileDao  extends FlightsDao {
     private final ObjectMapper objectMapper;
 
     public FlightsFileDao(ObjectMapper objectMapper) {
+
         this.objectMapper = objectMapper;
     }
 
     @Override
 
-    public boolean save(List<FlightsEntity> flights) {
+    public void save(List<FlightsEntity> flights) {
         try {
             final Path path= Paths.get(FLIGHTS_FILE_PATH);
             Files.write(path,objectMapper.writeValueAsBytes(flights));
@@ -32,7 +36,19 @@ public class FlightsFileDao  extends FlightsDao {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return false;
+    }
+    @Override
+    public void delete(int id) {
+        Iterator<FlightsEntity> iterator = getAllFLights().iterator();
+        while (iterator.hasNext()) {
+            FlightsEntity flight = iterator.next();
+            if (flight.getId().equals(id)) {
+                iterator.remove();
+                System.out.println("Flight with ID " + id + " deleted successfully.");
+                return;
+            }
+        }
+        System.out.println("Flight with ID " + id + " not found.");
     }
 
 }

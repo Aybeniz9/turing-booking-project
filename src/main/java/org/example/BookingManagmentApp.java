@@ -41,7 +41,7 @@ public class BookingManagmentApp {
                 switch (choice) {
                     case 1:
 //                        displayOnlineBoard();
-                        bookingController.
+                        bookingController.onlineBoard
                         break;
                     case 2:
                         //displayFlightInfo();
@@ -76,8 +76,8 @@ public class BookingManagmentApp {
             } else {
                 System.out.printf("%-15s %-20s %-25s\n", "Flight Number", "Destination", "Departure Time");
                 System.out.println("------------------------------------------------------------");
-                for (Flight flight : flights) {
-                    System.out.printf("%-15s %-20s %-25s\n", flight.getFlightNumber(), flight.getDestination(), flights.getdateTime());
+                for (FlightsEntity flight : flights) {
+                    System.out.printf("%-15s %-20s %-25s\n", flight.getFlightNumber(), flight.getDestination(), flights.);
                 }
             }
 

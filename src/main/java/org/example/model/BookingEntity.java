@@ -8,6 +8,9 @@ public class BookingEntity {
     private int id;
     private int flight_id;
 
+    public BookingEntity() {
+    }
+
     public BookingEntity(String name, String surname, int id, int flight_id) {
         this.name = name;
         this.surname = surname;

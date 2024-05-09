@@ -8,6 +8,8 @@ public class FlightsDto {
     public int freeSpaces;
     public String destination;
 
+    public FlightsDto() {
+    }
 
     public FlightsDto(String id, LocalDateTime dateTime, int freeSpaces, String destination) {
         this.id = id;

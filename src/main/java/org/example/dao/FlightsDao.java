@@ -4,42 +4,64 @@ import org.example.model.FlightsEntity;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 
-public class FlightsDao implements DAO<FlightsEntity> {
-    private String filePath;
-
-    public FlightsDao(String filePath) {
-        this.filePath = filePath;
-    }
-
-    @Override
-    public void save(List<FlightsEntity> entities) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-            for (FlightsEntity flight : entities) {
-                writer.println
-                        (flight.getId() + "," + flight.getDestination() + "," +
-                                flight.getDate() + "," + flight.getFreeSpaces());
-            }
-            System.out.println("Flights saved successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void delete(int id) {
-        Iterator<FlightsEntity> iterator = getAllFLights().iterator();
-        while (iterator.hasNext()) {
-            FlightsEntity flight = iterator.next();
-            if (flight.getId().equals(id)) {
-                iterator.remove();
-                System.out.println("Flight with ID " + id + " deleted successfully.");
-                return;
-            }
-        }
-        System.out.println("Flight with ID " + id + " not found.");
-    }
+public  abstract class FlightsDao implements DAO<FlightsEntity> {
+//    private String filePath;
+//
+//    public FlightsDao(String filePath) {
+//        this.filePath = filePath;
+//    }
+//
+//
+//    @Override
+//    public void save(List<FlightsEntity> entities) {
+//        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+//            for (FlightsEntity flight : entities) {
+//                writer.println
+//                        (flight.getId() + "," + flight.getDestination() + "," +
+//                                flight.getDate() + "," + flight.getFreeSpaces());
+//            }
+//            System.out.println("Flights saved successfully.");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public void delete(int id) {
+//        Iterator<FlightsEntity> iterator = getAllFLights().iterator();
+//        while (iterator.hasNext()) {
+//            FlightsEntity flight = iterator.next();
+//            if (flight.getId().equals(id)) {
+//                iterator.remove();
+//                System.out.println("Flight with ID " + id + " deleted successfully.");
+//                return;
+//            }
+//        }
+//        System.out.println("Flight with ID " + id + " not found.");
+//    }
+//
+//    @Override
+//    public Collection<FlightsEntity> findById() {
+//        return null;
+//    }
+//
+//    @Override
+//    public Collection<FlightsEntity> getAll() {
+//        return null;
+//    }
+//
+//    @Override
+//    public Optional<FlightsEntity> findOneBy(Predicate<FlightsEntity> predicate) {
+//        return Optional.empty();
+//    }
+//
+//    @Override
+//    public Collection<FlightsEntity> findAllBy(Predicate<FlightsEntity> predicate) {
+//        return null;
+//    }
 //    @Override
 //    public FlightsEntity save(FlightsEntity flightsEntity) {
 //        return null;
