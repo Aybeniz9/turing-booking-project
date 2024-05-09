@@ -9,6 +9,6 @@ public interface BookingService {
 
     BookingDto cancelBooking(String id);
 
-    BookingDto myFlights(BookingDto bookingDto);
+    BookingDto myFlights(String bookingDto);
 
 }
