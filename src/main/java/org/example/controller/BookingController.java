@@ -1,20 +1,27 @@
 package org.example.controller;
+
+import org.example.entities.BookingEntity;
 import org.example.entities.FlightsEntity;
 import org.example.exception.BookingNotFoundException;
 import org.example.service.BookingService;
+import org.example.service.FlightsService;
+
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.*;
 
 
 public class BookingController {
     private final BookingService bookingService;
+    private FlightsService flightsService;
+    private Scanner scanner;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
+        this.scanner = new Scanner(System.in);
     }
 
-    public void cancelBooking(){
+    public void cancelBooking() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the booking ID you want to cancel: ");
         String bookingId = scanner.nextLine();
@@ -27,15 +34,33 @@ public class BookingController {
             System.out.println("Booking cancellation failed: " + e.getMessage());
         }
     }
-    public String getMyFlights(){
-       Scanner scanner=new Scanner(System.in);
+
+    public void displayMyFlights() {
+        System.out.println("Enter your full name:");
+        String passengerFullName = scanner.nextLine();
+
+        List<BookingEntity> myBookings = bookingService.getMyBookings(passengerFullName);
+
+        if (!myBookings.isEmpty()) {
+            System.out.println("Your Bookings:");
+            for (BookingEntity booking : myBookings) {
+                System.out.println(booking);
+            }
+        } else {
+            System.out.println("No bookings found for the passenger.");
+        }
+
+    }
+
+    public String getMyFlights() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Input passenger name");
-        String passenger_name= scanner.nextLine();
+        String passenger_name = scanner.nextLine();
         return null;
     }
 
-    public void SearchBookFlight(){
-        Scanner scanner=new Scanner(System.in);
+    public void searchBookFlight() {
+        Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter destination:");
             String destination = scanner.nextLine();
@@ -45,9 +70,9 @@ public class BookingController {
 
             System.out.println("Enter number of passengers:");
             int numPassengers = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
-            List<FlightsEntity> availableFlights = flightController.searchFlights(destination, date, numPassengers);
+            List<FlightsEntity> availableFlights = flightsService.searchAvailableFlights(destination, date, numPassengers);
 
             if (availableFlights.isEmpty()) {
                 System.out.println("No flights available for the given criteria.");
@@ -66,11 +91,16 @@ public class BookingController {
 
                 } else if (choice > 0 && choice <= availableFlights.size()) {
                     // Book the selected flight
-                    Flight selectedFlight = availableFlights.get(choice - 1);
+                    FlightsEntity selectedFlight = availableFlights.get(choice - 1);
                     System.out.println("Enter passenger names (comma-separated):");
-                    String passengerNamesInput = scanner.nextLine();
-                    String[] passengerNames = passengerNamesInput.split(",");
-                    boolean booked = bookingController.bookFlight(selectedFlight.getId(), passengerNames);
+                     scanner.nextLine();
+                    List<String> passengerNames = new ArrayList<>();
+                    for (int i = 0; i < numPassengers; i++) {
+                        System.out.print("Passenger " + (i + 1) + ": ");
+                        passengerNames.add(scanner.nextLine());
+                    }
+                   //String[] passengerNames = passengerNamesInput.split(",");
+                    boolean booked = bookingService.bookFlight(selectedFlight.getId(), passengerNames);
                     if (booked) {
                         System.out.println("Flight booked successfully!");
                     } else {
@@ -85,7 +115,10 @@ public class BookingController {
             e.printStackTrace();
         }
     }
-    public String creatBooking(){
+
+
+
+    public String creatBooking() {
         return null;
     }
 

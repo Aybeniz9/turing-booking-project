@@ -1,4 +1,5 @@
 package org.example.entities;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,6 +20,7 @@ public class FlightsEntity {
         this.destination = destination;
     }
 
+
     public String getId() {
         return id;
     }
@@ -27,13 +29,21 @@ public class FlightsEntity {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.dateTime = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
+
+//    public LocalDateTime getDate() {
+//        return dateTime;
+//    }
+//
+//    public void setDate(LocalDateTime date) {
+//        this.dateTime = date;
+//    }
 
     public int getFreeSpaces() {
         return freeSpaces;
