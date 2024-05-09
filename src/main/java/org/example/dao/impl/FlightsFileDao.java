@@ -3,17 +3,17 @@ package org.example.dao.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dao.FlightsDao;
-import org.example.model.BookingEntity;
-import org.example.model.FlightsEntity;
+import org.example.entities.FlightsEntity;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.io.*;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class FlightsFileDao  extends FlightsDao {
     private  static  final  String RESOURCE_PATH="src/main/java/org/example/resource";
@@ -23,6 +23,22 @@ public class FlightsFileDao  extends FlightsDao {
     public FlightsFileDao(ObjectMapper objectMapper) {
 
         this.objectMapper = objectMapper;
+    }
+    @Override
+    public List<FlightsEntity> getAllFlights() {
+        List<FlightsEntity> flights = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(","); // Assuming CSV format: id,destination,dateTime,availableSeats
+                // Assuming Flight constructor accepts id, destination, dateTime (String), and availableSeats (int)
+                FlightsEntity flight = new FlightsEntity(parts[0], parts[1], LocalDateTime.parse(parts[2]), Integer.parseInt(parts[3]));
+                flights.add(flight);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return flights;
     }
 
     @Override
@@ -50,5 +66,8 @@ public class FlightsFileDao  extends FlightsDao {
         }
         System.out.println("Flight with ID " + id + " not found.");
     }
+
+
+
 
 }

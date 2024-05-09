@@ -1,12 +1,12 @@
 package org.example.service;
 
-import org.example.dao.FlightsDao;
-import org.example.model.FlightsEntity;
+import org.example.entities.FlightsEntity;
 import org.example.model.dto.FlightsDto;
 
-import java.awt.*;
+import java.util.*;
 
 public interface  FlightsService {
+    List<FlightsEntity> getAllFlightsFromKievNext24Hours();
     FlightsDto onlineBoard( FlightsDto flightsDto);
     FlightsDto String searchBookFlight(FlightsDto flightsDto);
 

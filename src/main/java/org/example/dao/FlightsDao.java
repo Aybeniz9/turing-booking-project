@@ -1,10 +1,6 @@
 package org.example.dao;
 
-import org.example.model.FlightsEntity;
-
-import java.io.*;
-import java.util.*;
-import java.util.function.Predicate;
+import org.example.entities.FlightsEntity;
 
 
 public  abstract class FlightsDao implements DAO<FlightsEntity> {
