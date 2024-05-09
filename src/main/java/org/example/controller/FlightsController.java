@@ -11,21 +11,23 @@ public class FlightsController  {
     public FlightsController(FlightsService flightsService) {
         this.flightsService = flightsService;
     }
+    public void displayOnlineBoard() {
+        List<FlightsEntity> flights = flightsService.getAllFlightsFromKievNext24Hours();
 
-
-    public  void displayOnlineBoard(){
-            List<FlightsEntity> flights = flightsService.getAllFlightsFromKievNext24Hours();
-
-            System.out.println("Flights from Kiev in the next 24 hours:");
-            System.out.println("--------------------------------------");
-            if (flights.isEmpty()) {
-                System.out.println("No flights available from Kiev in the next 24 hours.");
-            } else {
-                for (FlightsEntity flight : flights) {
-                    System.out.println(flight); // Assuming Flight class has appropriate toString() method
-                }
+        System.out.println("Online-board:");
+        System.out.println("-------------");
+        if (flights.isEmpty()) {
+            System.out.println("No flights available from Kiev in the next 24 hours.");
+        } else {
+            for (FlightsEntity flight : flights) {
+                System.out.println("Flight ID: " + flight.getId());
+                System.out.println("Destination: " + flight.getDestination());
+                System.out.println("Departure Time: " + flight.getDate());
+                System.out.println("Available Seats: " + flight.getFreeSpaces());
+                System.out.println();
             }
-    }
+        }
+
     public String searchBookFlight(){
         return null;
     }

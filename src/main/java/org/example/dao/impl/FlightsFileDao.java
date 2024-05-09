@@ -20,26 +20,12 @@ public class FlightsFileDao  extends FlightsDao {
     private  static final  String FLIGHTS_FILE_PATH=RESOURCE_PATH.concat("flights.txt");
     private final ObjectMapper objectMapper;
 
+
     public FlightsFileDao(ObjectMapper objectMapper) {
 
         this.objectMapper = objectMapper;
     }
-    @Override
-    public List<FlightsEntity> getAllFlights() {
-        List<FlightsEntity> flights = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(","); // Assuming CSV format: id,destination,dateTime,availableSeats
-                // Assuming Flight constructor accepts id, destination, dateTime (String), and availableSeats (int)
-                FlightsEntity flight = new FlightsEntity(parts[0], parts[1], LocalDateTime.parse(parts[2]), Integer.parseInt(parts[3]));
-                flights.add(flight);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return flights;
-    }
+
 
     @Override
 
@@ -66,8 +52,31 @@ public class FlightsFileDao  extends FlightsDao {
         }
         System.out.println("Flight with ID " + id + " not found.");
     }
+    private String filePath;
 
+    public FlightsFileDao(String filePath) {
+        this.filePath = filePath;
+    }
 
+    @Override
+    public List<FlightsEntity> getAllFLights() {
+            List<FlightsEntity> flights = new ArrayList<>();
+            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    String id = parts[0];
+                    String destination = parts[1];
+                    LocalDateTime dateTime = LocalDateTime.parse(parts[2]);
+                    int freeSeats= Integer.parseInt(parts[3]);
+                    FlightsEntity flight = new FlightsEntity(id,dateTime,freeSeats, destination);
+                    flights.add(flight);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return flights;
+        }
 
 
 }

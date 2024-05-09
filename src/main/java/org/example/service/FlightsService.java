@@ -7,7 +7,7 @@ import java.util.*;
 
 public interface  FlightsService {
     List<FlightsEntity> getAllFlightsFromKievNext24Hours();
-    FlightsDto onlineBoard( FlightsDto flightsDto);
+    FlightsDto displayOnlineBoard( FlightsDto flightsDto);
     FlightsDto String searchBookFlight(FlightsDto flightsDto);
     List<FlightsEntity> getFlightsFromKievNext24Hours();
     FlightsEntity getFlightById(String flightId);

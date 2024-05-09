@@ -10,7 +10,7 @@ public interface DAO<T> {
     void save(List<T> t);
 
     void delete(int id);
-
+    Collection<T> getAllFLights();
     Collection<T> findById();
 
     Collection<T> getAll();
