@@ -45,7 +45,7 @@ public class BookingManagmentApp {
                         flightController.showTheFlightInfo();
                         break;
                     case 3:
-                        flightController.searchBookFlight();
+                        bookingController.searchBookFlight();
                         break;
                     case 4:
 

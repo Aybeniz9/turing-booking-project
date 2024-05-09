@@ -88,12 +88,13 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
 
         // Create booking for each passenger
         for (String passengerName : passengerNames) {
-            BookingEntity booking = new BookingEntity(booking.getId(),passengerName);
-            flight.getBookings().add(booking);
+            BookingEntity booking = new BookingEntity(flight.getId(), passengerName);
+//            flight.getBookings().add(booking);
+            bookings.add(booking);
         }
 
-        // Update flight in the database
-        flightsDao.updateFlight(flight);
+
+        bookingDao.updateFlight(flight);
 
         return true;
     }
