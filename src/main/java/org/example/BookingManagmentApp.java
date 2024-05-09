@@ -45,7 +45,7 @@ public class BookingManagmentApp {
                         flightController.showTheFlightInfo();
                         break;
                     case 3:
-                        flightController.searchBookFlight();
+                        bookingController.searchBookFlight();
                         break;
                     case 4:
 
@@ -56,7 +56,7 @@ public class BookingManagmentApp {
 
                         break;
                     case 0:
-                        exit();
+                        //exit();
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");

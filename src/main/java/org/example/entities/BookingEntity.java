@@ -17,8 +17,22 @@ public class BookingEntity {
         this.id = id;
         this.flight_id = flight_id;
     }
-    
 
+    public BookingEntity(String name, String id, int flight_id) {
+        this.name = name;
+        this.id = id;
+        this.flight_id = flight_id;
+    }
+
+    public BookingEntity(String name, String id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public BookingEntity(String name, int flight_id) {
+        this.name = name;
+        this.flight_id = flight_id;
+    }
 
     public String getName() {
         return name;

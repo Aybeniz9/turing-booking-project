@@ -20,7 +20,7 @@ public class FlightsServiceİmpl implements FlightsService {
     private FlightsFileDao flightsFileDao;
 
     public List<FlightsEntity> getAllFlightsFromKievNext24Hours() {
-        List<FlightsEntity> allFlights = flightsFileDao.getAllFLights();
+        List<FlightsEntity> allFlights = flightsFileDao.getAllFlights();
         List<FlightsEntity> flightsFromKievNext24Hours = new ArrayList<>();
         for (FlightsEntity flight : allFlights) {
             if (isFromKiev(flight.getDestination()) && isWithinNext24Hours(flight.getDateTime())) {
@@ -57,6 +57,11 @@ public class FlightsServiceİmpl implements FlightsService {
         }
 
         return availableFlights;
+    }
+
+    @Override
+    public List<FlightsEntity> getMyFlights(String name) {
+        return null;
     }
 
 //    //@Override

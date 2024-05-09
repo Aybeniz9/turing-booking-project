@@ -62,6 +62,9 @@ public class FlightsFileDao extends FlightsDao {
         }
         writeFlightsToFile(flights);
     }
+
+
+
     private void writeFlightsToFile(List<FlightsEntity> flights) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (FlightsEntity flight : flights) {
@@ -137,6 +140,9 @@ public class FlightsFileDao extends FlightsDao {
     @Override
     public Collection<FlightsEntity> findAllBy(Predicate<FlightsEntity> predicate) {
         return getAll().stream().filter(predicate).toList();
+    }
+    public List<FlightsEntity> searchFlights(String destination, String date, int numPeople) {
+        return null;
     }
 
 }
