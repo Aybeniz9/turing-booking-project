@@ -1,10 +1,6 @@
 package org.example.dao;
 
-import org.example.model.BookingEntity;
-
-import java.util.Collection;
-import java.util.Optional;
-import java.util.function.Predicate;
+import org.example.entities.BookingEntity;
 
 public abstract class BookingDao implements DAO<BookingEntity> {
 //    @Override

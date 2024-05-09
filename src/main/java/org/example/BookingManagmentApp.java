@@ -2,12 +2,10 @@ package org.example;
 
 import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
-import org.example.model.FlightsEntity;
+import org.example.entities.FlightsEntity;
 
 
 import java.util.*;
-import java.util.Scanner;
-
 import java.util.Scanner;
 
 public class BookingManagmentApp {
