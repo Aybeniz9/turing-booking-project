@@ -5,18 +5,12 @@ import org.example.model.dto.FlightsDto;
 
 import java.util.*;
 
-public interface FlightsService {
+public interface  FlightsService {
     List<FlightsEntity> getAllFlightsFromKievNext24Hours();
-
-    FlightsDto displayOnlineBoard(FlightsDto flightsDto);
-
-    FlightsDto String
-
-    searchBookFlight(FlightsDto flightsDto);
-
-    List<FlightsEntity> getFlightsFromKievNext24Hours();
-
-    FlightsEntity getFlightById(String flightId);
+    FlightsEntity getFlightById(String flight_id);
+    List<FlightsEntity> getMyFlights(String name);
+    FlightsDto displayOnlineBoard( FlightsDto flightsDto);
+    FlightsDto String searchBookFlight(FlightsDto flightsDto);
 
     List<FlightsEntity> searchFlights(String destination, String date, int numPeople);
 

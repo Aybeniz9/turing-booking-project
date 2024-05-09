@@ -16,13 +16,11 @@ public class FlightsServiceİmpl implements FlightsService {
         this.flightsDao = flightsDao;
     }
 
-    private FlightsFileDao flightsFileDAO;
+    private FlightsFileDao flightsFileDao;
 
     public List<FlightsEntity> getAllFlightsFromKievNext24Hours() {
-        List<FlightsEntity> allFlights = flightsFileDAO.getAllFLights();
+        List<FlightsEntity> allFlights = flightsFileDao.getAllFLights();
         List<FlightsEntity> flightsFromKievNext24Hours = new ArrayList<>();
-
-        // Assuming Flight class has appropriate methods to check origin and departure time
         for (FlightsEntity flight : allFlights) {
             if (isFromKiev(flight.getDestination()) && isWithinNext24Hours(flight.getDate())) {
                 flightsFromKievNext24Hours.add(flight);
@@ -31,6 +29,7 @@ public class FlightsServiceİmpl implements FlightsService {
 
         return flightsFromKievNext24Hours;
     }
+
 
     private boolean isFromKiev(String destination) {
         return destination.equalsIgnoreCase("Kiev");
@@ -42,25 +41,22 @@ public class FlightsServiceİmpl implements FlightsService {
         return dateTime.isAfter(now) && dateTime.isBefore(next24Hours);
     }
 
-
     @Override
     public FlightsDto displayOnlineBoard(FlightsDto flightsDto) {
         return null;
     }
 
+
+    @Override
+    public FlightsEntity getFlightById(String flight_id) {
+        return flightsDao.getFlightById(flight_id);
+    }
+
+
+
     @Override
     public String searchBookFlight(FlightsDto flightsDto) {
         return null;
-    }
-
-    @Override
-    public List<FlightsEntity> getFlightsFromKievNext24Hours() {
-        return flightsDao.getFlightsFromKievNext24Hours(); // Delegate to DAO
-    }
-
-    @Override
-    public FlightsEntity getFlightById(String flightId) {
-        return flightsDao.getFlightById(flightId); // Delegate to DAO
     }
 
     @Override
