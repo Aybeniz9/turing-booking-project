@@ -57,7 +57,7 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
     }
 
     @Override
-    public BookingDto myFlights(BookingDto bookingDto) {
+    public BookingDto myFlights(String bookingDto) {
         return null;
     }
 }

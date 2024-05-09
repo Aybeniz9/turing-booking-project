@@ -5,13 +5,13 @@ import java.util.Objects;
 public class BookingEntity {
     private String name;
     private String surname;
-    private int id;
+    private String id;
     private int flight_id;
 
     public BookingEntity() {
     }
 
-    public BookingEntity(String name, String surname, int id, int flight_id) {
+    public BookingEntity(String name, String surname, String id, int flight_id) {
         this.name = name;
         this.surname = surname;
         this.id = id;
@@ -36,11 +36,11 @@ public class BookingEntity {
         this.surname = surname;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -57,7 +57,7 @@ public class BookingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookingEntity that = (BookingEntity) o;
-        return id == that.id && flight_id == that.flight_id && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+        return Objects.equals(id, that.id) && flight_id == that.flight_id && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
     }
 
     @Override
