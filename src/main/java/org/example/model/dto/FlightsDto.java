@@ -11,6 +11,7 @@ public class FlightsDto {
     public FlightsDto() {
     }
 
+
     public FlightsDto(String id, LocalDateTime dateTime, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = dateTime;
