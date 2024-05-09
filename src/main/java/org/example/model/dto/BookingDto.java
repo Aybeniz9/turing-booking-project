@@ -3,13 +3,13 @@ package org.example.model.dto;
 public class BookingDto {
     public String name;
     public String surname;
-    public int id;
+    public String id;
     public int flight_id;
 
     public BookingDto() {
     }
 
-    public BookingDto(String name, String surname, int id, int flight_id) {
+    public BookingDto(String name, String surname, String id, int flight_id) {
         this.name = name;
         this.surname = surname;
         this.id = id;

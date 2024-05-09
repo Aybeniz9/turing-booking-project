@@ -1,4 +1,5 @@
 package org.example;
+
 import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
 import org.example.model.FlightsEntity;
@@ -10,8 +11,6 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 public class BookingManagmentApp {
-
-
 
 
     public class Console {
@@ -64,6 +63,7 @@ public class BookingManagmentApp {
                 }
             }
         }
+
         private static void displayOnlineBoard() {
             System.out.println("Online Board: Flights from Kiev in the next 24 hours");
             System.out.println("-----------------------------------------------------");

@@ -7,7 +7,6 @@ import org.example.service.BookingService;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class BookingServiceİmpl extends BookingDao implements BookingService {
     private final BookingDao bookingDao;
@@ -45,7 +44,7 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
     }
 
     @Override
-    public BookingDto cancelBooking(BookingDto bookingDto) {
+    public BookingDto cancelBooking(String bookingDto) {
         Iterator<BookingDto> iterator = bookings.iterator();
         while (iterator.hasNext()) {
             BookingDto booking = iterator.next();

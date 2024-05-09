@@ -40,5 +40,6 @@ public class FlightsServiceİmpl implements FlightsService {
     public List<FlightsEntity> searchFlights(String destination, String date, int numPeople) {
         return flightsDao.searchFlights(destination, date, numPeople); // Delegate to DAO
     }
+
 }
 }
