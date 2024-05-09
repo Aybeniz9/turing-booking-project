@@ -83,14 +83,13 @@ public class BookingServiceİmpl extends BookingDao implements BookingService {
             return false;
         }
 
-        // Reduce available seats
         flight.setFreeSpaces(flight.getFreeSpaces()- passengerNames.size());
 
         // Create booking for each passenger
         for (String passengerName : passengerNames) {
             BookingEntity booking = new BookingEntity(flight.getId(), passengerName);
 //            flight.getBookings().add(booking);
-            bookings.add(booking);
+            getBookings().add(booking);
         }
 
 

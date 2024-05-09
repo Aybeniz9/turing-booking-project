@@ -56,7 +56,7 @@ public class BookingManagmentApp {
 
                         break;
                     case 0:
-                        exit();
+                        //exit();
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");

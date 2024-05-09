@@ -19,6 +19,7 @@ public interface DAO<T> {
 
     Collection<T> getAll();
     void updateFlight(FlightsEntity updatedFlight);
+    List<FlightsEntity> searchFlights(String destination, String date, int numPeople);
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
