@@ -45,14 +45,15 @@ public class BookingManagmentApp {
                         flightController.showTheFlightInfo();
                         break;
                     case 3:
-                        searchAndBookFlight();
+                        flightController.searchBookFlight();
                         break;
                     case 4:
 
                         bookingController.cancelBooking();
                         break;
                     case 5:
-                        flightController.displayMyFlights();
+                        bookingController.displayMyFlights();
+
                         break;
                     case 0:
                         exit();

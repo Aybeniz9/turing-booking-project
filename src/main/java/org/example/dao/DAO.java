@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.entities.BookingEntity;
 import org.example.entities.FlightsEntity;
 
 import java.util.*;
@@ -13,11 +14,11 @@ public interface DAO<T> {
 
     void delete(int id);
 
-    Collection<T> getAllFLights();
-
-    Collection<T> getById();
+    List<FlightsEntity> getAllFlights();
+    List<BookingEntity> getAllBookings();
 
     Collection<T> getAll();
+    void updateFlight(FlightsEntity updatedFlight);
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
