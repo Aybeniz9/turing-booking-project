@@ -13,6 +13,4 @@ public class BookingFileDao  extends BookingDao {
         this.objectMapper = objectMapper;
     }
 
-
-
 }
