@@ -8,6 +8,7 @@ import org.example.entities.FlightsEntity;
 import java.util.*;
 import java.util.Scanner;
 
+
 public class BookingManagmentApp {
 
 
