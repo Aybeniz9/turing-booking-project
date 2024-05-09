@@ -71,6 +71,7 @@ public class FlightsFileDao  extends FlightsDao {
                     int freeSeats= Integer.parseInt(parts[3]);
                     FlightsEntity flight = new FlightsEntity(id,dateTime,freeSeats, destination);
                     flights.add(flight);
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
