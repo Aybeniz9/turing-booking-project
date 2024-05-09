@@ -1,10 +1,10 @@
 package org.example.controller;
 import org.example.entities.FlightsEntity;
 import org.example.exception.BookingNotFoundException;
-import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 import java.util.List;
 import java.util.Scanner;
+
 
 
 public class BookingController {
@@ -27,7 +27,7 @@ public class BookingController {
             System.out.println("Booking cancellation failed: " + e.getMessage());
         }
     }
-    public String myFlights(){
+    public String getMyFlights(){
        Scanner scanner=new Scanner(System.in);
         System.out.println("Input passenger name");
         String passenger_name= scanner.nextLine();

@@ -1,5 +1,7 @@
 package org.example.dao;
 
+import org.example.entities.FlightsEntity;
+
 import java.util.*;
 import java.util.Collection;
 import java.util.Optional;
@@ -13,11 +15,13 @@ public interface DAO<T> {
 
     Collection<T> getAllFLights();
 
-    Collection<T> findById();
+    Collection<T> getById();
 
     Collection<T> getAll();
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
     Collection<T> findAllBy(Predicate<T> predicate);
+
+    FlightsEntity getFlightById(String Id);
 }
