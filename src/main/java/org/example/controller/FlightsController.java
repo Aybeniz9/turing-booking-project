@@ -5,12 +5,14 @@ import org.example.service.FlightsService;
 
 import java.util.*;
 
-public class FlightsController  {
+public class FlightsController {
 
     private final FlightsService flightsService;
+
     public FlightsController(FlightsService flightsService) {
         this.flightsService = flightsService;
     }
+
     public void displayOnlineBoard() {
         List<FlightsEntity> flights = flightsService.getAllFlightsFromKievNext24Hours();
 
@@ -28,12 +30,12 @@ public class FlightsController  {
             }
         }
 
-    public String searchBookFlight(){
-        return null;
-    }
-    public String showTheFlightInfo(){
-        return null;
-    }
+        public String searchBookFlight () {
+            return null;
+        }
+        public String showTheFlightInfo () {
+            return null;
+        }
 
 
-}
+    }

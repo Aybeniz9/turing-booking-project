@@ -15,6 +15,7 @@ public class FlightsServiceİmpl implements FlightsService {
     public FlightsServiceİmpl(FlightsDao flightsDao) {
         this.flightsDao = flightsDao;
     }
+
     private FlightsFileDao flightsFileDAO;
 
     public List<FlightsEntity> getAllFlightsFromKievNext24Hours() {
@@ -30,6 +31,7 @@ public class FlightsServiceİmpl implements FlightsService {
 
         return flightsFromKievNext24Hours;
     }
+
     private boolean isFromKiev(String destination) {
         return destination.equalsIgnoreCase("Kiev");
     }
