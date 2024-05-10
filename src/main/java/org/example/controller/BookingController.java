@@ -14,7 +14,7 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public void cancelBooking(){
+    public void cancelBooking() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the booking ID you want to cancel: ");
         String bookingId = scanner.nextLine();
@@ -27,15 +27,16 @@ public class BookingController {
             System.out.println("Booking cancellation failed: " + e.getMessage());
         }
     }
-    public String myFlights(){
-       Scanner scanner=new Scanner(System.in);
+
+    public String myFlights() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Input passenger name");
-        String passenger_name= scanner.nextLine();
+        String passenger_name = scanner.nextLine();
         return null;
     }
 
-    public void SearchBookFlight(){
-        Scanner scanner=new Scanner(System.in);
+    public void SearchBookFlight() {
+        Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter destination:");
             String destination = scanner.nextLine();
@@ -65,8 +66,7 @@ public class BookingController {
                 if (choice == 0) {
 
                 } else if (choice > 0 && choice <= availableFlights.size()) {
-                    // Book the selected flight
-                    Flight selectedFlight = availableFlights.get(choice - 1);
+                    FlightsEntity selectedFlight = availableFlights.get(choice - 1);
                     System.out.println("Enter passenger names (comma-separated):");
                     String passengerNamesInput = scanner.nextLine();
                     String[] passengerNames = passengerNamesInput.split(",");
@@ -85,8 +85,12 @@ public class BookingController {
             e.printStackTrace();
         }
     }
-    public String creatBooking(){
-        return null;
-    }
 
+    public String creatBooking(BookingDto bookingDto) {
+        final String id = bookingDto.id;
+        if (id == null) {
+            throw new RuntimeException("Wrong input");
+        }
+        return String.valueOf(bookingService.createBooking(bookingDto));
+    }
 }

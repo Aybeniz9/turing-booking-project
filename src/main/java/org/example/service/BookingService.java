@@ -2,12 +2,14 @@ package org.example.service;
 
 import org.example.model.dto.BookingDto;
 
+import java.util.Collection;
+
 public interface BookingService {
-    BookingDto createBooking(BookingDto bookingDto);
+    void createBooking(Collection<BookingDto> bookingDto);
 
     BookingDto searchBooking(BookingDto bookingDto);
 
-    BookingDto cancelBooking(String id);
+    void cancelBooking(int id);
 
     BookingDto myFlights(String bookingDto);
 
