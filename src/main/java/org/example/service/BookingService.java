@@ -3,20 +3,17 @@ package org.example.service;
 import org.example.entities.BookingEntity;
 import org.example.model.dto.BookingDto;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 public interface BookingService {
+    void createBooking(Collection<BookingDto> bookings);
 
-    List<BookingEntity> getMyBookings(String passengerFullName);
-    boolean bookFlight(String flightId, List<String> passengerNames);
+    void cancelBooking(long id);
 
+    Collection<BookingDto> getAllBookings();
 
-    BookingDto createBooking(BookingDto bookingDto);
+    Collection<BookingEntity> getBookFlight(String flightId, List<String> passengerNames);
 
-    BookingDto searchBooking(BookingDto bookingDto);
-
-    BookingDto cancelBooking(String id);
-
-
-
+    BookingDto findBookingByOne(long id);
 }
