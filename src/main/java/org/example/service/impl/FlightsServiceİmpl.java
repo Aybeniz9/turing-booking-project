@@ -17,6 +17,7 @@ public class FlightsServiceİmpl implements FlightsService {
         this.flightsDao = flightsDao;
     }
 
+
     @Override
     public boolean save(Collection<FlightsDto> flightsDtos) {
         ArrayList<FlightsEntity> flightsEntities =new ArrayList<>();
@@ -30,8 +31,8 @@ public class FlightsServiceİmpl implements FlightsService {
         ArrayList<FlightsDto>flightsDtos=new ArrayList<>();
         Collection <FlightsEntity>  flightsEntities= flightsDao.getAll();
         flightsEntities.stream().map(flightsDto -> flightsEntities.add(new FlightsEntity(flightsDto.getId(),flightsDto.getDateTime(),flightsDto.getFreeSpaces(),flightsDto.getDestination(),flightsDto.getOrigin())));
-
         return flightsDtos;
+
     }
 
 

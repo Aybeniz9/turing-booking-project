@@ -63,27 +63,18 @@ public class FlightsFileDao extends FlightsDao {
 
     @Override
     public Optional<FlightsEntity> findOneBy(Predicate<FlightsEntity> predicate) {
-        return Optional.empty();
+        Optional<FlightsEntity> first = getAll().stream().filter(predicate).findFirst();
+        return first;
     }
 
     @Override
     public Collection<FlightsEntity> findAllBy(Predicate<FlightsEntity> predicate) {
-        return null;
+        Collection <FlightsEntity> allBy= getAll().stream().filter(predicate).toList();
+        return allBy;
     }
 }
 
-//    @Override
-//
-//    public void save(List<FlightsEntity> flights) {
-//        try {
-//            final Path path = Paths.get(FLIGHTS_FILE_PATH);
-//            Files.write(path, objectMapper.writeValueAsBytes(flights));
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 //
 //    @Override
 //    public void delete(int id) {
