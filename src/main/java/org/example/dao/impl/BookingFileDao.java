@@ -30,7 +30,7 @@ public class BookingFileDao extends BookingDao {
 
     @Override
     public void delete(int id) {
-
+        getAll().remove(id);
     }
 
     @Override
@@ -55,5 +55,4 @@ public class BookingFileDao extends BookingDao {
         Collection<BookingEntity> first = getAll().stream().filter(predicate).findFirst().stream().toList();
         return first;
     }
-
 }
