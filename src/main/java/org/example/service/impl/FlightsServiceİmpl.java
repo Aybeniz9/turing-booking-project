@@ -32,7 +32,6 @@ public class FlightsServiceİmpl implements FlightsService {
         Collection <FlightsEntity>  flightsEntities= flightsDao.getAll();
         flightsEntities.stream().map(flightsDto -> flightsEntities.add(new FlightsEntity(flightsDto.getId(),flightsDto.getDateTime(),flightsDto.getFreeSpaces(),flightsDto.getDestination(),flightsDto.getOrigin())));
         return flightsDtos;
-
     }
 
 
