@@ -1,17 +1,24 @@
 package org.example.controller;
+
+import org.example.entities.BookingEntity;
 import org.example.entities.FlightsEntity;
 import org.example.exception.BookingNotFoundException;
-import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
+import org.example.service.FlightsService;
+
 import java.util.List;
 import java.util.Scanner;
+import java.util.*;
 
 
 public class BookingController {
     private final BookingService bookingService;
+    private FlightsService flightsService;
+    private Scanner scanner;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
+        this.scanner = new Scanner(System.in);
     }
 
     public void cancelBooking() {
@@ -28,14 +35,31 @@ public class BookingController {
         }
     }
 
-    public String myFlights() {
+    public void displayMyFlights() {
+        System.out.println("Enter your full name:");
+        String passengerFullName = scanner.nextLine();
+
+        List<BookingEntity> myBookings = bookingService.getMyBookings(passengerFullName);
+
+        if (!myBookings.isEmpty()) {
+            System.out.println("Your Bookings:");
+            for (BookingEntity booking : myBookings) {
+                System.out.println(booking);
+            }
+        } else {
+            System.out.println("No bookings found for the passenger.");
+        }
+
+    }
+
+    public String getMyFlights() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input passenger name");
         String passenger_name = scanner.nextLine();
         return null;
     }
 
-    public void SearchBookFlight() {
+    public void searchBookFlight() {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter destination:");
@@ -46,9 +70,9 @@ public class BookingController {
 
             System.out.println("Enter number of passengers:");
             int numPassengers = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
-            List<FlightsEntity> availableFlights = flightController.searchFlights(destination, date, numPassengers);
+            List<FlightsEntity> availableFlights = flightsService.searchAvailableFlights(destination, date, numPassengers);
 
             if (availableFlights.isEmpty()) {
                 System.out.println("No flights available for the given criteria.");
@@ -66,11 +90,17 @@ public class BookingController {
                 if (choice == 0) {
 
                 } else if (choice > 0 && choice <= availableFlights.size()) {
+                    // Book the selected flight
                     FlightsEntity selectedFlight = availableFlights.get(choice - 1);
                     System.out.println("Enter passenger names (comma-separated):");
-                    String passengerNamesInput = scanner.nextLine();
-                    String[] passengerNames = passengerNamesInput.split(",");
-                    boolean booked = bookingController.bookFlight(selectedFlight.getId(), passengerNames);
+                     scanner.nextLine();
+                    List<String> passengerNames = new ArrayList<>();
+                    for (int i = 0; i < numPassengers; i++) {
+                        System.out.print("Passenger " + (i + 1) + ": ");
+                        passengerNames.add(scanner.nextLine());
+                    }
+                   //String[] passengerNames = passengerNamesInput.split(",");
+                    boolean booked = bookingService.bookFlight(selectedFlight.getId(), passengerNames);
                     if (booked) {
                         System.out.println("Flight booked successfully!");
                     } else {
@@ -86,11 +116,10 @@ public class BookingController {
         }
     }
 
-    public String creatBooking(BookingDto bookingDto) {
-        final String id = bookingDto.id;
-        if (id == null) {
-            throw new RuntimeException("Wrong input");
-        }
-        return String.valueOf(bookingService.createBooking(bookingDto));
+
+
+    public String creatBooking() {
+        return null;
     }
+
 }

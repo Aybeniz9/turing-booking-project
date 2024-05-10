@@ -8,6 +8,7 @@ import org.example.entities.FlightsEntity;
 import java.util.*;
 import java.util.Scanner;
 
+
 public class BookingManagmentApp {
 
 
@@ -33,25 +34,26 @@ public class BookingManagmentApp {
                 System.out.println("0. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
-//                        displayOnlineBoard();
-                        bookingController.
+                        flightController.displayOnlineBoard();
+
                         break;
                     case 2:
-                        //displayFlightInfo();
+                        flightController.showTheFlightInfo();
                         break;
                     case 3:
-                        //searchAndBookFlight();
+                        bookingController.searchBookFlight();
                         break;
                     case 4:
-                        //cancelBooking();
+
                         bookingController.cancelBooking();
                         break;
                     case 5:
-                        //displayMyFlights();
+                        bookingController.displayMyFlights();
+
                         break;
                     case 0:
                         //exit();
@@ -62,25 +64,24 @@ public class BookingManagmentApp {
             }
         }
 
-        private static void displayOnlineBoard() {
-            System.out.println("Online Board: Flights from Kiev in the next 24 hours");
-            System.out.println("-----------------------------------------------------");
+//        private static void displayOnlineBoard() {
+//            System.out.println("Online Board: Flights from Kiev in the next 24 hours");
+//            System.out.println("-----------------------------------------------------");
+//
+//            // Get the list of flights from Kiev in the next 24 hours from the FlightManager
+//            List<FlightsEntity> flights = flightsController.getFlightsFromKievInNext24Hours();
+//
+//            if (flights.isEmpty()) {
+//                System.out.println("No flights available in the next 24 hours.");
+//            } else {
+//                System.out.printf("%-15s %-20s %-25s\n", "Flight Number", "Destination", "Departure Time");
+//                System.out.println("------------------------------------------------------------");
+//                for (FlightsEntity flight : flights) {
+//                    System.out.printf("%-15s %-20s %-25s\n", flight.getId(), flight.getDestination(), flight.getDate());
+//                }
+//            }
+//            displayMainMenu();
 
-            // Get the list of flights from Kiev in the next 24 hours from the FlightManager
-            List<FlightsEntity> flights = flightsController.getFlightsFromKievInNext24Hours();
-
-            if (flights.isEmpty()) {
-                System.out.println("No flights available in the next 24 hours.");
-            } else {
-                System.out.printf("%-15s %-20s %-25s\n", "Flight Number", "Destination", "Departure Time");
-                System.out.println("------------------------------------------------------------");
-                for (FlightsEntity flight : flights) {
-                    System.out.printf("%-15s %-20s %-25s\n", flight.getFlightNumber(), flight.getDestination(), flights.);
-                }
-            }
-
-            // Display main menu
-            displayMainMenu();
         }
 
 

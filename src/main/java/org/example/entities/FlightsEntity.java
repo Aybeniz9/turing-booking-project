@@ -1,4 +1,7 @@
 package org.example.entities;
+
+import org.example.model.dto.FlightsDto;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -8,15 +11,54 @@ public class FlightsEntity {
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
-
+    private  String origin;
     public FlightsEntity() {
     }
 
-    public FlightsEntity(String id, LocalDateTime date, int freeSpaces, String destination) {
+    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
         this.id = id;
-        this.dateTime = date;
+        this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
+        this.origin = origin;
+    }
+
+    public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination) {
+        this.dateTime = dateTime;
+        this.freeSpaces = freeSpaces;
+        this.destination = destination;
+    }
+
+    public FlightsEntity(String id, LocalDateTime dateTime) {
+        this.id = id;
+        this.dateTime = dateTime;
+    }
+
+    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces, String destination) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.freeSpaces = freeSpaces;
+        this.destination = destination;
+    }
+
+    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.freeSpaces = freeSpaces;
+    }
+
+    public FlightsEntity(String id, int freeSpaces, String destination) {
+        this.id = id;
+        this.freeSpaces = freeSpaces;
+        this.destination = destination;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getId() {
@@ -27,12 +69,12 @@ public class FlightsEntity {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.dateTime = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public int getFreeSpaces() {
@@ -54,22 +96,20 @@ public class FlightsEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FlightsEntity that = (FlightsEntity) o;
-        return freeSpaces == that.freeSpaces && Objects.equals(id, that.id) && Objects.equals(dateTime, that.dateTime) &&
-                Objects.equals(destination, that.destination);
+        if (!(o instanceof FlightsDto that)) return false;
+        return getFreeSpaces() == that.getFreeSpaces() && Objects.equals(getId(), that.getId()) && Objects.equals(getDateTime(), that.getDateTime()) && Objects.equals(getDestination(), that.getDestination());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateTime, freeSpaces, destination);
+        return Objects.hash(getId(), getDateTime(), getFreeSpaces(), getDestination());
     }
 
     @Override
     public String toString() {
-        return "FlightsEntity{" +
+        return "FlightsDto{" +
                 "id='" + id + '\'' +
-                ", date=" + dateTime +
+                ", dateTime=" + dateTime +
                 ", freeSpaces=" + freeSpaces +
                 ", destination='" + destination + '\'' +
                 '}';

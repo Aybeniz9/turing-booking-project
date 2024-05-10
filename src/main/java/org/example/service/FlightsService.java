@@ -3,21 +3,15 @@ package org.example.service;
 import org.example.entities.FlightsEntity;
 import org.example.model.dto.FlightsDto;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
-public interface FlightsService {
-    List<FlightsEntity> getAllFlightsFromKievNext24Hours();
+public interface  FlightsService {
+//    FlightsEntity getFlightById(String flight_id);
+//    List<FlightsEntity> searchAvailableFlights(String destination, LocalDateTime dateTime);
+    boolean save(Collection<FlightsDto> flightsEntities);
+    Collection <FlightsDto> getAllFlight();
 
-    FlightsDto displayOnlineBoard(FlightsDto flightsDto);
 
-    FlightsDto String
-
-    searchBookFlight(FlightsDto flightsDto);
-
-    List<FlightsEntity> getFlightsFromKievNext24Hours();
-
-    FlightsEntity getFlightById(String flightId);
-
-    List<FlightsEntity> searchFlights(String destination, String date, int numPeople);
 
 }
