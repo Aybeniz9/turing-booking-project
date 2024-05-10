@@ -51,7 +51,7 @@ public class FlightsController {
                 System.out.println("Destination: " + flight.getDestination());
                 System.out.println("Departure Time: " + flight.getDateTime());
                 System.out.println("Available Seats: " + flight.getFreeSpaces());
-                System.out.println();
+
             }
         }
 
