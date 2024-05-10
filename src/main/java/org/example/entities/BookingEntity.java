@@ -1,20 +1,23 @@
 package org.example.entities;
 
 import java.util.Objects;
+import java.util.List;
 
 public class BookingEntity {
-    private String name;
+    private List<String> name;
     private String surname;
-    private String id;
+    private long id;
     private int flight_id;
 
-    public BookingEntity() {
+    public BookingEntity(int flightId, List<String> name) {
+        this.flight_id=flightId;
+        this.name=name;
     }
 
-    public BookingEntity(String name, String surname, String id, int flight_id) {
+    public BookingEntity(List<String> name, String surname, long id, int flight_id) {
+        this.id=id;
         this.name = name;
         this.surname = surname;
-        this.id = id;
         this.flight_id = flight_id;
     }
 
@@ -34,11 +37,11 @@ public class BookingEntity {
         this.flight_id = flight_id;
     }
 
-    public String getName() {
+    public List<String> getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(List<String> name) {
         this.name = name;
     }
 
@@ -50,11 +53,11 @@ public class BookingEntity {
         this.surname = surname;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
