@@ -14,16 +14,10 @@ public interface DAO<T> {
 
     void delete(int id);
 
-//    List<FlightsEntity> getAllFlights();
-//    List<BookingEntity> getAllBookings();
-
     Collection<T> getAll();
-//    void updateFlight(FlightsEntity updatedFlight);
-//    List<FlightsEntity> searchFlights(String destination, String date, int numPeople);
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
     Collection<T> findAllBy(Predicate<T> predicate);
 
-//    FlightsEntity getFlightById(String Id);
 }

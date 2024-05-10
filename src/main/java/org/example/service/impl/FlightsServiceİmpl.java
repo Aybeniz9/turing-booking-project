@@ -9,6 +9,7 @@ import org.example.service.FlightsService;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class FlightsServiceİmpl implements FlightsService {
     private final FlightsDao flightsDao;
@@ -24,6 +25,21 @@ public class FlightsServiceİmpl implements FlightsService {
         flightsDtos.stream().map(flightsDto ->flightsEntities.add( new FlightsEntity(flightsDto.getId(),flightsDto.getDateTime(),flightsDto.getFreeSpaces(),flightsDto.getDestination(),flightsDto.getOrigin())));
         flightsDao.save(flightsEntities);
         return true;
+    }
+
+    @Override
+    public void delete(int flight_id) {
+
+    }
+
+    @Override
+    public Collection<FlightsDto> findAllFlight() {
+        return null;
+    }
+
+    @Override
+    public Optional<FlightsDto> findFlightId(Predicate<FlightsDto> predicate) {
+        getAllFlight().stream().filter(predicate).findFirst();
     }
 
     @Override

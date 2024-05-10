@@ -5,12 +5,18 @@ import org.example.model.dto.FlightsDto;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Predicate;
 
 public interface  FlightsService {
-//    FlightsEntity getFlightById(String flight_id);
-//    List<FlightsEntity> searchAvailableFlights(String destination, LocalDateTime dateTime);
-    boolean save(Collection<FlightsDto> flightsEntities);
+
+    boolean save(Collection<FlightsDto> flightsEntities); //create reservation
+    void delete (int flight_id);
+    Collection<FlightsDto> findAllFlight();
+    Optional<FlightsDto> findFlightId(Predicate<FlightsDto> predicate);
     Collection <FlightsDto> getAllFlight();
+
+
+
 
 
 
