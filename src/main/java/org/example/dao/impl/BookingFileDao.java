@@ -23,10 +23,8 @@ public class BookingFileDao extends BookingDao {
     public void save(List<BookingEntity> bookings) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE_PATH))) {
             bw.write(objectMapper.writeValueAsString(bookings));
-            bw.close();
         } catch (IOException e) {
             System.out.println("Error save bookings" + e.getMessage());
-
         }
     }
 
