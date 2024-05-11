@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 public class FlightsEntity {
-    private String id;
+    private Long id;
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
@@ -15,7 +15,7 @@ public class FlightsEntity {
     public FlightsEntity() {
     }
 
-    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
+    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
@@ -29,25 +29,25 @@ public class FlightsEntity {
         this.destination = destination;
     }
 
-    public FlightsEntity(String id, LocalDateTime dateTime) {
+    public FlightsEntity(long id, LocalDateTime dateTime) {
         this.id = id;
         this.dateTime = dateTime;
     }
 
-    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces, String destination) {
+    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
     }
 
-    public FlightsEntity(String id, LocalDateTime dateTime, int freeSpaces) {
+    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
     }
 
-    public FlightsEntity(String id, int freeSpaces, String destination) {
+    public FlightsEntity(long id, int freeSpaces, String destination) {
         this.id = id;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
@@ -61,11 +61,11 @@ public class FlightsEntity {
         this.origin = origin;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

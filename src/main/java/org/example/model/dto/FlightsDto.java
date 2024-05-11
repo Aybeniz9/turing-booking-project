@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class FlightsDto {
-    private String id;
+    private long id;
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
@@ -12,7 +12,7 @@ public class FlightsDto {
     public FlightsDto() {
     }
 
-    public FlightsDto(String id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
+    public FlightsDto(long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
@@ -26,25 +26,25 @@ public class FlightsDto {
         this.destination = destination;
     }
 
-    public FlightsDto(String id, LocalDateTime dateTime) {
+    public FlightsDto(long id, LocalDateTime dateTime) {
         this.id = id;
         this.dateTime = dateTime;
     }
 
-    public FlightsDto(String id, LocalDateTime dateTime, int freeSpaces, String destination) {
+    public FlightsDto(long id, LocalDateTime dateTime, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
     }
 
-    public FlightsDto(String id, LocalDateTime dateTime, int freeSpaces) {
+    public FlightsDto(long id, LocalDateTime dateTime, int freeSpaces) {
         this.id = id;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
     }
 
-    public FlightsDto(String id, int freeSpaces, String destination) {
+    public FlightsDto(long id, int freeSpaces, String destination) {
         this.id = id;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
@@ -58,11 +58,11 @@ public class FlightsDto {
         this.origin = origin;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
