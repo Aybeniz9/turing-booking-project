@@ -15,7 +15,7 @@ public interface  FlightsService {
     Collection <FlightsDto> getAllFlightByFlightId( long id);
     Optional<FlightsDto> getOneFlightByFlightId(long id);
     Collection<FlightsDto> flightsInNext24Hours( String origin, LocalDateTime dateTime);
-    void delete (long id);
+
 
 
 
