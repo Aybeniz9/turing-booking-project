@@ -18,7 +18,8 @@ public class BookingController {
         bookingService.cancelBooking(flightId,passengerId);
     }
 
-    public Collection<BookingDto>getMyFlights(long flightId, String names) {
+    public Collection<BookingDto>
+    getMyFlights(long flightId, String names) {
     return bookingService.getMyFlights(flightId,names);
     }
 
@@ -29,9 +30,6 @@ public class BookingController {
 
     public void createBooking(Collection<BookingDto> bookingDto) {
         bookingService.createBooking(bookingDto);
-    }
-    public BookingDto findBookingByOne(long id){
-        return bookingService.findBookingByOne(id);
     }
 
 }

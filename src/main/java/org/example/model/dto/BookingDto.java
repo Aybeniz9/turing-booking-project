@@ -1,10 +1,11 @@
 package org.example.model.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BookingDto {
     public static  long MAX_ID = 0;
-    private long passengerId;
+    private long id;
     private long flightId;
     private String passengerName;
 
@@ -12,23 +13,23 @@ public class BookingDto {
     }
 
     public BookingDto(long flightId, String passengerName) {
-        this.passengerId = ++MAX_ID;
+        this.id = ++MAX_ID;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
     public BookingDto(long id, long flightId, String passengerName) {
-        this.passengerId = id;
+        this.id = id;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
-    public long getPassengerId() {
-        return passengerId;
+    public long getId() {
+        return id;
     }
 
-    public void setPassengerId(long passengerId) {
-        this.passengerId = passengerId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getFlightId() {
@@ -52,16 +53,16 @@ public class BookingDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookingDto that = (BookingDto) o;
-        return passengerId == that.passengerId && flightId == that.flightId && Objects.equals(passengerName, that.passengerName);
+        return id == that.id && flightId == that.flightId && Objects.equals(passengerName, that.passengerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(passengerId, flightId, passengerName);
+        return Objects.hash(id, flightId, passengerName);
     }
 
     @Override
     public String toString() {
-        return "BookingDto{id=%d, flightId=%d, passengerName=%s}".formatted(passengerId, flightId, passengerName);
+        return "BookingDto{id=%d, flightId=%d, passengerName=%s}".formatted(id, flightId, passengerName);
     }
 }
