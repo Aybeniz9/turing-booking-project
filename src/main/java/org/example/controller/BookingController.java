@@ -1,37 +1,35 @@
 package org.example.controller;
+
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
-import org.example.service.FlightsService;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
-
 
 public class BookingController {
     private final BookingService bookingService;
-    private FlightsService flightsService;
-
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
 
-    public void delete() {
-
+    public void cancelBooking(long flightId,long passengerId) {
+        bookingService.cancelBooking(flightId,passengerId);
     }
 
-    public String getMyFlights(long flightId,String names) {
-        return String.valueOf(bookingService.getMyFlights( flightId,names));
+    public Collection<BookingDto>
+    getMyFlights(long flightId, String names) {
+    return bookingService.getMyFlights(flightId,names);
     }
+
 
     public void searchBookFlight() {
+        // Implement search and book flight logic here
     }
 
-    public void creatBooking(BookingDto bookingDto)throws IOException {
-        bookingService.createBooking();
+    public void createBooking(Collection<BookingDto> bookingDto) {
+        bookingService.createBooking(bookingDto);
     }
 
-    public void save(List <BookingDto> bookingDtos){
-        bookingService.createBooking(bookingDtos);
-    }
 }
