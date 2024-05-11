@@ -5,7 +5,7 @@ import org.example.model.dto.BookingDto;
 import java.util.Collection;
 
 public interface BookingService {
-    void createBooking(Collection<BookingDto> bookings);
+    void createBooking(BookingDto bookings);
 
     void cancelBooking(long flightId,long passengerId);
 
