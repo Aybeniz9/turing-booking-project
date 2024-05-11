@@ -2,109 +2,48 @@ package org.example.service.impl;
 
 import org.example.dao.BookingDao;
 import org.example.entities.BookingEntity;
-import org.example.entities.FlightsEntity;
-import org.example.model.BookingEntity;
+import org.example.exception.BookingNotFoundException;
 import org.example.model.dto.BookingDto;
+import org.example.model.dto.FlightsDto;
 import org.example.service.BookingService;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class BookingServiceİmpl extends BookingDao implements BookingService {
-    private final BookingDao bookingDao;
+public class BookingServiceİmpl implements BookingService {
+    public BookingDao bookingDao;
 
-//    public BookingServiceİmpl(BookingDao bookingDao) {
-//        this.bookingDao = bookingDao;
-//        this.bookings = new ArrayList<>();
-//    }
-//
-//
-//    @Override
-//    public List<BookingEntity> getMyBookings(String passengerFullName) {
-//        List<BookingEntity> myBookings = new ArrayList<>();
-//        List<BookingEntity> allBookings = bookingDao.getAllBookings();
-//
-//        for (BookingEntity booking : allBookings) {
-//            if (booking.getName().equalsIgnoreCase(passengerFullName)) {
-//                myBookings.add(booking);
-//            }
-//        }
-//        return myBookings;
-//    }
-//
+    public BookingServiceİmpl(BookingDao bookingDao) {
+        this.bookingDao = bookingDao;
+    }
+
     @Override
     public void createBooking(Collection<BookingDto> bookings) {
-        BookingEntity bookingEntity = new BookingEntity(
-                bookingDto.name,
-                bookingDto.surname,
-                bookingDto.flight_id,
-                (int) (Math.random() * 10000)
-        );
-        BookingEntity savedEntity = bookingDao.save(bookingEntity);
-        return new BookingDto(
-                savedEntity.getName(),
-                savedEntity.getSurname(),
-                savedEntity.getId(),
-                savedEntity.getFlight_id()
-        );
+        Collection<BookingEntity> bookingDaoAll=bookingDao.getAll();
     }
-//
-//    @Override
-//    public BookingDto searchBooking(BookingDto bookingDto) {
-//        for (BookingDto booking : bookings) {
-//            if (booking.equals(bookingDto)) {
-//                return booking;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public BookingDto cancelBooking(String bookingDto) {
-//        Iterator<BookingDto> iterator = bookings.iterator();
-//        while (iterator.hasNext()) {
-//            BookingDto booking = iterator.next();
-//            if (booking.equals(bookingDto)) {
-//                iterator.remove();
-//                return booking;
-//            }
-//        }
-//        return null;
-//    }
-//    @Override
-//    public boolean bookFlight(String flightId, List<String> passengerNames) {
-//        FlightsEntity flight = bookingDao.getFlightById(flightId);
-//        if (flight == null) {
-//            return false;
-//        }
-//
-//        if (flight.getFreeSpaces()< passengerNames.size()) {
-//            return false;
-//        }
-//
-//        flight.setFreeSpaces(flight.getFreeSpaces()- passengerNames.size());
-//
-//        // Create booking for each passenger
-//        for (String passengerName : passengerNames) {
-//            BookingEntity booking = new BookingEntity(flight.getId(), passengerName);
-////            flight.getBookings().add(booking);
-//            getBookings().add(booking);
-//        }
-//
-//
-//        bookingDao.updateFlight(flight);
-//
-//        return true;
-//    }
-//
-//
-////    @Override
-////    public BookingDto myFlights(String bookingDto) {
-////        return null;
-////    }
 
+    @Override
+    public void cancelBooking(long id) {
+        Collection<BookingEntity> allReservation=bookingDao.getAll();
+        Collection<>
 
+    }
 
+    @Override
+    public Collection<BookingDto> getAllBookings() {
+        return null;
+    }
+
+    @Override
+    public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
+        Collection<BookingEntity> bookingDaoAll = bookingDao.getAll();
+        Collection<BookingEntity> mybooking = bookingDaoAll.stream().filter(bookingEntity -> bookingEntity.getFlightId() == flightId && bookingEntity.getPassengerName().equals(passengerNames)).toList();
+        return mybooking.stream().map(bookingEntity -> new BookingDto(bookingEntity.getId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).toList();
+    }
+
+    @Override
+    public BookingDto findBookingByOne(long id) {
+        return null;
+    }
 }
