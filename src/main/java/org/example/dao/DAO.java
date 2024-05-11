@@ -15,6 +15,6 @@ public interface DAO<T> {
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
-    Collection<T> findAllBy(Predicate<T> predicate);
+   Optional< Collection<T>> findAllBy(Predicate<T> predicate);
 
 }
