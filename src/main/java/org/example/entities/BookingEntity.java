@@ -1,56 +1,28 @@
 package org.example.entities;
 
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 public class BookingEntity {
-    private List<String> name;
-    private String surname;
+    public static long MAX_ID = 0;
     private long id;
-    private int flight_id;
+    private long flightId;
+    private String passengerName;
 
-    public BookingEntity(int flightId, List<String> name) {
-        this.flight_id=flightId;
-        this.name=name;
+    public BookingEntity() {
     }
 
-    public BookingEntity(List<String> name, String surname, long id, int flight_id) {
-        this.id=id;
-        this.name = name;
-        this.surname = surname;
-        this.flight_id = flight_id;
+    public BookingEntity(long flightId, String passengerName) {
+        this.id = ++MAX_ID;
+        this.flightId = flightId;
+        this.passengerName = passengerName;
     }
 
-    public BookingEntity(String name, String id, int flight_id) {
-        this.name = name;
+
+    public BookingEntity(long id, long flightId, String passengerName) {
         this.id = id;
-        this.flight_id = flight_id;
-    }
-
-    public BookingEntity(String name, String id) {
-        this.name = name;
-        this.id = id;
-    }
-
-    public BookingEntity(String name, int flight_id) {
-        this.name = name;
-        this.flight_id = flight_id;
-    }
-
-    public List<String> getName() {
-        return name;
-    }
-
-    public void setName(List<String> name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+        this.flightId = flightId;
+        this.passengerName = passengerName;
     }
 
     public long getId() {
@@ -61,34 +33,41 @@ public class BookingEntity {
         this.id = id;
     }
 
-    public int getFlight_id() {
-        return flight_id;
+    public long getFlightId() {
+        return flightId;
     }
 
-    public void setFlight_id(int flight_id) {
-        this.flight_id = flight_id;
+    public void setFlightId(long flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getPassengerName() {
+        return passengerName;
+    }
+
+    public void setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookingEntity that = (BookingEntity) o;
-        return Objects.equals(id, that.id) && flight_id == that.flight_id && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+        BookingEntity booking = (BookingEntity) o;
+        return id == booking.id && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, id, flight_id);
+        return Objects.hash(id, flightId, passengerName);
     }
 
     @Override
     public String toString() {
         return "BookingEntity{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", flight_id=" + flight_id +
+                "id=" + id +
+                ", flightId=" + flightId +
+                ", passengerName=" + passengerName +
                 '}';
     }
 }

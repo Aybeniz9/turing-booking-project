@@ -1,62 +1,68 @@
 package org.example.model.dto;
+
 import java.util.List;
+import java.util.Objects;
 
 public class BookingDto {
-    private static long MAX_ID=0;
-    public List<String> name;
-    public String surname;
-    public Long id;
-    public int flight_id;
+    public static  long MAX_ID = 0;
+    private long id;
+    private long flightId;
+    private String passengerName;
 
-    public BookingDto() {this.id=++MAX_ID;
+    public BookingDto() {
     }
 
-    public BookingDto(List<String> name, String surname, long id, int flight_id) {
-        this.name = name;
-        this.surname = surname;
+    public BookingDto(long flightId, String passengerName) {
+        this.id = ++MAX_ID;
+        this.flightId = flightId;
+        this.passengerName = passengerName;
+    }
+
+    public BookingDto(long id, long flightId, String passengerName) {
         this.id = id;
-        this.flight_id = flight_id;
+        this.flightId = flightId;
+        this.passengerName = passengerName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(long flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getPassengerName() {
+        return passengerName;
+    }
+
+    public void setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookingDto that = (BookingDto) o;
+        return id == that.id && flightId == that.flightId && Objects.equals(passengerName, that.passengerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, flightId, passengerName);
     }
 
     @Override
     public String toString() {
-        return "BookingDto{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", flight_id=" + flight_id +
-                '}';
-    }
-
-    public List<String> getName() {
-        return name;
-    }
-
-    public void setName(List<String> name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getFlight_id() {
-        return flight_id;
-    }
-
-    public void setFlight_id(int flight_id) {
-        this.flight_id = flight_id;
+        return "BookingDto{id=%d, flightId=%d, passengerName=%s}".formatted(id, flightId, passengerName);
     }
 }
