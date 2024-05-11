@@ -4,23 +4,24 @@ import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
 import org.example.entities.FlightsEntity;
 
-
-import java.util.*;
+import java.util.List;
 import java.util.Scanner;
 
-
 public class BookingManagmentApp {
+    public static void main(String[] args) {
+        Console console = new Console();
+        console.displayMainMenu();
+    }
 
-
-    public class Console {
+    public static class Console {
         private final Scanner scanner;
-        private final FlightsController flightController;
+        private final FlightsController flightsController;
         private final BookingController bookingController;
 
         public Console() {
             scanner = new Scanner(System.in);
-            flightController = new FlightsController();
-            bookingController = new BookingController();
+            this.bookingController = new BookingController();
+            flightsController = new FlightsController();
         }
 
         public void displayMainMenu() {
@@ -38,25 +39,21 @@ public class BookingManagmentApp {
 
                 switch (choice) {
                     case 1:
-                        flightController.displayOnlineBoard();
-
+                        displayMainMenu();
                         break;
                     case 2:
-                        flightController.showTheFlightInfo();
+                        flightsController.showTheFlightInfo();
                         break;
                     case 3:
                         bookingController.searchBookFlight();
                         break;
                     case 4:
-
                         bookingController.cancelBooking();
                         break;
                     case 5:
                         bookingController.displayMyFlights();
-
                         break;
                     case 0:
-                        //exit();
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -64,11 +61,10 @@ public class BookingManagmentApp {
             }
         }
 
-//        private static void displayOnlineBoard() {
+//        private void displayOnlineBoard() {
 //            System.out.println("Online Board: Flights from Kiev in the next 24 hours");
 //            System.out.println("-----------------------------------------------------");
 //
-//            // Get the list of flights from Kiev in the next 24 hours from the FlightManager
 //            List<FlightsEntity> flights = flightsController.getFlightsFromKievInNext24Hours();
 //
 //            if (flights.isEmpty()) {
@@ -80,10 +76,6 @@ public class BookingManagmentApp {
 //                    System.out.printf("%-15s %-20s %-25s\n", flight.getId(), flight.getDestination(), flight.getDate());
 //                }
 //            }
-//            displayMainMenu();
-
-        }
-
-
+//        }
     }
 }

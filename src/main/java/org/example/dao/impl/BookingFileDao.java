@@ -29,8 +29,11 @@ public class BookingFileDao extends BookingDao {
     }
 
     @Override
-    public void delete(int id) {
-        getAll().remove(id);
+    public void delete(long flightId, long passengerId) {
+        BookingEntity bookingForCancel = getAll().stream()
+                .filter(bookingEntity -> bookingEntity.getFlightId() == flightId && bookingEntity.getPassengerId() == passengerId)
+                .findFirst().get();
+        getAll().remove(bookingForCancel);
     }
 
     @Override
