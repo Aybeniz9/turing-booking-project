@@ -20,28 +20,13 @@ public class FlightsServiceİmpl implements FlightsService {
 
 
     @Override
-    public boolean save(Collection<FlightsDto> flightsDtos) {
-        ArrayList<FlightsEntity> flightsEntities =new ArrayList<>();
-        flightsDtos.stream().map(flightsDto ->flightsEntities.add( new FlightsEntity(flightsDto.getId(),flightsDto.getDateTime(),flightsDto.getFreeSpaces(),flightsDto.getDestination(),flightsDto.getOrigin())));
+    public void  createFlights(FlightsDto flightsDto) {
+      FlightsEntity flightsEntity =new FlightsEntity(
+              flightsDto.getDateTime(),flightsDto.getDestination(), flightsDto.getFreeSpaces();
+              Collection <FlightsEntity> flightsEntities=flightsDao.getAll();
+        flightsEntities.add(flightsEntity);
         flightsDao.save(flightsEntities);
-        return true;
-    }
-
-    @Override
-    public void delete(int flight_id) {
-
-    }
-
-    @Override
-    public Collection<FlightsDto> findAllFlight() {
-        return null;
-    }
-
-    @Override
-    public Optional<FlightsDto> findFlightId(Predicate<FlightsDto> predicate) {
-        getAllFlight().stream().filter(predicate).findFirst();
-    }
-
+    } //hazir
     @Override
     public Collection<FlightsDto> getAllFlight() {
         ArrayList<FlightsDto>flightsDtos=new ArrayList<>();
@@ -49,8 +34,55 @@ public class FlightsServiceİmpl implements FlightsService {
         flightsEntities.stream().map(flightsDto -> flightsEntities.add(new FlightsEntity(flightsDto.getId(),flightsDto.getDateTime(),flightsDto.getFreeSpaces(),flightsDto.getDestination(),flightsDto.getOrigin())));
         return flightsDtos;
 
+    }//hazir
+    @Override
+    public Collection<FlightsDto> getAllFlightByOrigin(String origin) {
+        return getAllFlight().stream().filter(flightsDto -> flightsDto.getOrigin().equalsIgnoreCase(origin)).toList();
+    }//hazir
+    @Override
+    public Collection<FlightsDto> getAllFlightByDestination(String destination) {
+
+        return getAllFlight().stream().filter(flightsDto -> flightsDto.getDestination().equalsIgnoreCase(destination)).toList();
+    }//hazir
+
+    @Override
+    public void delete(long id) {
+
     }
 
+    @Override
+    public Optional<FlightsDto> getOneFlightByFlightId(long id) {
+        return getAllFlight().stream().filter(flightsDto -> flightsDto.getId()==id).findFirst();
+    }
+
+
+
+
+    @Override
+    public Collection<FlightsDto> getAllFlightByFlightId(long id) {
+        return getAllFlight().stream().filter(flightsDto -> flightsDto.getId()==id).toList();
+
+    }
+
+    @Override
+    public Collection<FlightsDto> flightsInNext24Hours(String origin, LocalDateTime dateTime) {
+
+        LocalDateTime now=LocalDateTime.now();
+        LocalDateTime next24Hours=now.plusHours(24);
+        Collection<FlightsDto> allFlights=getAllFlight();
+        return  allFlights.stream()
+                .filter(flightsDto -> flightsDto.getOrigin().equalsIgnoreCase(origin)&& flightsDto.getDateTime().isAfter(now)&&flightsDto.getDateTime().isBefore(next24Hours)).toList();
+    }
+//    @Override
+//    public Collection<FlightsDto> findAllFlight() {
+//
+//    }
+//
+//    @Override
+//    public Optional<FlightsDto> findFlightId(Predicate<FlightsDto> predicate) {
+//        Optional<FlightsDto> findFlight= getAllFlight().stream().filter(predicate).findFirst();
+//        return findFlight;
+//    }
 
 //    public List<FlightsEntity> getAllFlightsFromKievNext24Hours() {
 //        List<FlightsEntity> allFlights = flightsFileDao.getAllFlights();
