@@ -1,8 +1,5 @@
 package org.example.dao;
 
-import org.example.entities.BookingEntity;
-import org.example.entities.FlightsEntity;
-
 import java.util.*;
 import java.util.Collection;
 import java.util.Optional;
@@ -12,7 +9,7 @@ public interface DAO<T> {
 
     void save(List<T> t);
 
-    void delete(int id);
+    void delete(long flightId, long passengerId);
 
     Collection<T> getAll();
 

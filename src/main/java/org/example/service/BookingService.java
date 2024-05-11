@@ -7,11 +7,10 @@ import java.util.Collection;
 public interface BookingService {
     void createBooking(Collection<BookingDto> bookings);
 
-    void cancelBooking(long id);
+    void cancelBooking(long flightId,long passengerId);
 
     Collection<BookingDto> getAllBookings();
 
     Collection<BookingDto> getMyFlights(long flightId, String passengerNames);
 
-    BookingDto findBookingByOne(long id);
 }

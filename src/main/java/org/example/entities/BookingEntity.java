@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class BookingEntity {
     public static long MAX_ID = 0;
-    private long id;
+    private long passengerId;
     private long flightId;
     private String passengerName;
 
@@ -13,24 +13,20 @@ public class BookingEntity {
     }
 
     public BookingEntity(long flightId, String passengerName) {
-        this.id = ++MAX_ID;
+        this.passengerId = ++MAX_ID;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
 
-    public BookingEntity(long id, long flightId, String passengerName) {
-        this.id = id;
+    public BookingEntity(long passengerId, long flightId, String passengerName) {
+        this.passengerId = passengerId;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public long getPassengerId() {
+        return passengerId;
     }
 
     public long getFlightId() {
@@ -54,18 +50,18 @@ public class BookingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookingEntity booking = (BookingEntity) o;
-        return id == booking.id && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
+        return passengerId == booking.passengerId && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, flightId, passengerName);
+        return Objects.hash(passengerId, flightId, passengerName);
     }
 
     @Override
     public String toString() {
         return "BookingEntity{" +
-                "id=" + id +
+                "passengerId=" + passengerId +
                 ", flightId=" + flightId +
                 ", passengerName=" + passengerName +
                 '}';
