@@ -7,6 +7,7 @@ import org.example.entities.BookingEntity;
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class BookingFileDao extends BookingDao {
 
@@ -30,10 +31,10 @@ public class BookingFileDao extends BookingDao {
 
     @Override
     public void delete(long flightId, long passengerId) {
-        BookingEntity bookingForCancel = getAll().stream()
-                .filter(bookingEntity -> bookingEntity.getFlightId() == flightId && bookingEntity.getPassengerId() == passengerId)
-                .findFirst().get();
-        getAll().remove(bookingForCancel);
+       Collection< BookingEntity> bookingForCancel = getAll();
+        bookingForCancel.removeIf(bookingEntity -> bookingEntity.getFlightId() == flightId && bookingEntity.getPassengerId() == passengerId);
+save((List<BookingEntity>) bookingForCancel);
+
     }
 
     @Override
@@ -49,13 +50,11 @@ public class BookingFileDao extends BookingDao {
 
     @Override
     public Optional<BookingEntity> findOneBy(Predicate<BookingEntity> predicate) {
-        Optional<BookingEntity> first = getAll().stream().filter(predicate).findFirst();
-        return first;
+        return getAll().stream().filter(predicate).findFirst();
     }
 
     @Override
-    public Collection<BookingEntity> findAllBy(Predicate<BookingEntity> predicate) {
-        Collection<BookingEntity> first = getAll().stream().filter(predicate).findFirst().stream().toList();
-        return first;
+    public Optional<Collection<BookingEntity>> findAllBy(Predicate<BookingEntity> predicate) {
+        return  Optional.of(getAll().stream().filter(predicate).findFirst().stream().toList());
     }
 }
