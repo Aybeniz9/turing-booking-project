@@ -5,9 +5,9 @@ import org.example.entities.BookingEntity;
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.function.Predicate;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookingServiceİmpl implements BookingService {
@@ -18,10 +18,10 @@ public class BookingServiceİmpl implements BookingService {
     }
 
     @Override
-    public void createBooking(Collection<BookingDto> bookings) {
-        bookingDao.save(bookings.stream()
-                .map(dto -> new BookingEntity(dto.getFlightId(), dto.getPassengerName()))
-                .collect(Collectors.toList()));
+    public void createBooking(BookingDto bookingDto) {
+        List<BookingEntity> listForSave = new ArrayList<>();
+        listForSave.add(new BookingEntity(bookingDto.getFlightId(), bookingDto.getPassengerName()));
+        bookingDao.save(listForSave);
     }
 
     @Override
@@ -38,7 +38,15 @@ public class BookingServiceİmpl implements BookingService {
 
     @Override
     public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
-        return  bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId()==flightId&&bookingEntity.getPassengerName().equals(passengerNames)));
+        Collection<BookingEntity> entities = bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId() == flightId &&
+                bookingEntity.getPassengerName().equals(passengerNames)).get();
+        return entities.stream().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(),
+                bookingEntity.getFlightId(), bookingEntity.getPassengerName())).toList();
     }
+
+    @Override
+    public BookingDto findBookingByOne(long id) {
+         return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getPassengerId() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
+ }
 
 }
