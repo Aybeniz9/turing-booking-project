@@ -5,6 +5,7 @@ import org.example.entities.BookingEntity;
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 
+import java.awt.print.Book;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -38,7 +39,15 @@ public class BookingServiceİmpl implements BookingService {
 
     @Override
     public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
-        return  bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId()==flightId&&bookingEntity.getPassengerName().equals(passengerNames)));
+        Collection<BookingEntity> entities = bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId() == flightId &&
+                bookingEntity.getPassengerName().equals(passengerNames)).get();
+        return entities.stream().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(),
+                bookingEntity.getFlightId(), bookingEntity.getPassengerName())).toList();
     }
+
+    @Override
+    public BookingDto findBookingByOne(long id) {
+         return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getPassengerId() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
+ }
 
 }
