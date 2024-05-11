@@ -3,79 +3,105 @@ package org.example;
 import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
 import org.example.entities.FlightsEntity;
+import org.example.model.dto.FlightsDto;
 
-import java.util.List;
+import java.awt.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import java.util.*;
+import java.util.Scanner;
+
+
 public class BookingManagmentApp {
-    public static void main(String[] args) {
-        Console console = new Console();
-        console.displayMainMenu();
+    Scanner scanner = new Scanner(System.in);
+    private final FlightsController flightController;
+    private final BookingController bookingController;
+
+    public BookingManagmentApp(FlightsController flightController, BookingController bookingController) {
+        this.flightController = flightController;
+        this.bookingController = bookingController;
     }
 
-    public static class Console {
-        private final Scanner scanner;
-        private final FlightsController flightsController;
-        private final BookingController bookingController;
 
-        public Console() {
-            scanner = new Scanner(System.in);
-            this.bookingController = new BookingController();
-            flightsController = new FlightsController();
-        }
 
-        public void displayMainMenu() {
-            while (true) {
-                System.out.println("Main Menu:");
-                System.out.println("1. Online-board");
-                System.out.println("2. Show flight info");
-                System.out.println("3. Search and book a flight");
-                System.out.println("4. Cancel booking");
-                System.out.println("5. My flights");
-                System.out.println("0. Exit");
-                System.out.print("Enter your choice: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
+    public void displayMainMenu() {
+        while (true) {
+            System.out.println("Main Menu:");
+            System.out.println("1. Online-board");
+            System.out.println("2. Show flight info");
+            System.out.println("3. Search and book a flight");
+            System.out.println("4. Cancel booking");
+            System.out.println("5. My flights");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-                switch (choice) {
-                    case 1:
-                        displayMainMenu();
-                        break;
-                    case 2:
-                        flightsController.showTheFlightInfo();
-                        break;
-                    case 3:
-                        bookingController.searchBookFlight();
-                        break;
-                    case 4:
-                        bookingController.cancelBooking();
-                        break;
-                    case 5:
-                        bookingController.displayMyFlights();
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                }
+            switch (choice) {
+                case 1:
+                    displayOnlineBoard();
+
+                    break;
+                case 2:
+                    showTheFlightInfo();
+                    break;
+                case 3:
+                    searchBookFlight();
+                    break;
+                case 4:
+
+                    cancelBooking();
+                    break;
+                case 5:
+                    displayMyFlights();
+
+                    break;
+                case 0:
+                    //exit();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
-
-//        private void displayOnlineBoard() {
-//            System.out.println("Online Board: Flights from Kiev in the next 24 hours");
-//            System.out.println("-----------------------------------------------------");
-//
-//            List<FlightsEntity> flights = flightsController.getFlightsFromKievInNext24Hours();
-//
-//            if (flights.isEmpty()) {
-//                System.out.println("No flights available in the next 24 hours.");
-//            } else {
-//                System.out.printf("%-15s %-20s %-25s\n", "Flight Number", "Destination", "Departure Time");
-//                System.out.println("------------------------------------------------------------");
-//                for (FlightsEntity flight : flights) {
-//                    System.out.printf("%-15s %-20s %-25s\n", flight.getId(), flight.getDestination(), flight.getDate());
-//                }
-//            }
-//        }
     }
+
+    public void displayOnlineBoard() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the location : ");
+        String location = scanner.nextLine();
+        LocalDateTime dateTime = LocalDateTime.now();
+        Collection<FlightsDto> flights =flightController.getOnlineBoard(location, dateTime);
+        for (FlightsDto flight : flights) {
+            System.out.println(flight.getId()+ " - " + flight.getDestination() + " - " +
+                    flight.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        }
+    }
+    public void showTheFlightInfo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" Enter the flight id");
+        long id = sc.nextLong();
+        Collection<FlightsDto> flights = flightController.getAllFlightsByFLightId(id);
+        System.out.println(" Flights Info: ");
+        if (flights != null) {
+            for (FlightsDto f : flights) {
+                System.out.println(f.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "- " + f.getDestination() + " -" + f.getFreeSpaces());
+
+            }
+        } else {
+            System.out.println(" FLights not found");
+        }
+    }
+
+     public void searchBookFlight(){
+
+
 }
+     public void cancelBooking(){
+
+     }
+
+
+}
+
