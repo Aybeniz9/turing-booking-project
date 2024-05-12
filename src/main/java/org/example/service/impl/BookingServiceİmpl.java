@@ -35,6 +35,7 @@ public class BookingServiceİmpl implements BookingService {
                 .map(booking -> new BookingDto(booking.getPassengerId(), booking.getFlightId(), booking.getPassengerName()))
                 .collect(Collectors.toList());
     }
+
     @Override
     public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
         Collection<BookingEntity> entities = bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId() == flightId &&
