@@ -2,12 +2,14 @@ package org.example.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+
 public class FlightsDto {
     private long id;
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
-    private  String origin;
+    private String origin;
+
     public FlightsDto() {
     }
 
@@ -93,21 +95,22 @@ public class FlightsDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof FlightsDto that)) return false;
-        return getFreeSpaces() == that.getFreeSpaces() && Objects.equals(getId(), that.getId()) && Objects.equals(getDateTime(), that.getDateTime()) && Objects.equals(getDestination(), that.getDestination());
+        return getId() == that.getId() && getFreeSpaces() == that.getFreeSpaces() && Objects.equals(getDateTime(), that.getDateTime()) && Objects.equals(getDestination(), that.getDestination()) && Objects.equals(getOrigin(), that.getOrigin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDateTime(), getFreeSpaces(), getDestination());
+        return Objects.hash(getId(), getDateTime(), getFreeSpaces(), getDestination(), getOrigin());
     }
 
     @Override
     public String toString() {
         return "FlightsDto{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", dateTime=" + dateTime +
                 ", freeSpaces=" + freeSpaces +
                 ", destination='" + destination + '\'' +
+                ", origin='" + origin + '\'' +
                 '}';
     }
 }

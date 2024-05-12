@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
+
 public interface DAO<T> {
 
     void save(List<T> t);
@@ -14,6 +15,6 @@ public interface DAO<T> {
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
-    Optional< Collection<T>> findAllBy(Predicate<T> predicate);
+    Optional<Collection<T>> findAllBy(Predicate<T> predicate);
 
 }

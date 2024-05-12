@@ -4,6 +4,7 @@ import org.example.model.dto.FlightsDto;
 
 import java.time.LocalDateTime;
 import java.util.*;
+
 public interface FlightsService {
 
     void createFlights(FlightsDto flightsDto); //create reservation

@@ -10,33 +10,27 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class FlightsFileDao extends FlightsDao {
-    private static final String RESOURCE_PATH = "src/main/java/org/example/resource";
-    private static final String FLIGHTS_FILE_PATH = RESOURCE_PATH.concat("flights.json");
+    private static final String RESOURCE_PATH = "C:\\Users\\User\\IdeaProjects\\Turing\\java-course-turing\\turing-booking-project-1\\src\\main\\java\\org\\example\\resource\\";
+    private static final String FLIGHTS_FILE_PATH = RESOURCE_PATH.concat("flight.json");
     private final ObjectMapper objectMapper;
 
     public FlightsFileDao(ObjectMapper objectMapper) {
 
         this.objectMapper = objectMapper;
     }
-
-
     @Override
 
     public void save(List<FlightsEntity> flightsEntities) {
-       try {
-           FileWriter fw= new FileWriter(FLIGHTS_FILE_PATH);
-           BufferedWriter bf=new BufferedWriter(fw);
-           bf.write(objectMapper.writeValueAsString(flightsEntities));
-           bf.close();
-       }catch (IOException e){
-           e.getMessage();
-       }
+        try {
+            FileWriter fw = new FileWriter(FLIGHTS_FILE_PATH);
+            BufferedWriter bf = new BufferedWriter(fw);
+            bf.write(objectMapper.writeValueAsString(flightsEntities));
+            bf.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
-    @Override
-    public void delete(long flightId) {
-
-    }
     @Override
     public Collection<FlightsEntity> getAll() {
         try {
@@ -52,7 +46,7 @@ public class FlightsFileDao extends FlightsDao {
         } catch (IOException e) {
             System.out.println("Error while reading flights from file: " + e.getMessage());
         }
-        return null;
+        return new ArrayList <>();
     }
 
     @Override
@@ -63,7 +57,11 @@ public class FlightsFileDao extends FlightsDao {
 
     @Override
     public Optional<Collection<FlightsEntity>> findAllBy(Predicate<FlightsEntity> predicate) {
-        Collection <FlightsEntity> allBy= getAll().stream().filter(predicate).toList();
+        Collection<FlightsEntity> allBy = getAll().stream().filter(predicate).toList();
         return Optional.of(allBy);
+    }
+    @Override
+    public void delete(long flightId) {
+
     }
 }
