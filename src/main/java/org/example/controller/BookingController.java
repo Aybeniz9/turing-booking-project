@@ -12,8 +12,8 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public void cancelBooking(long flightId,long passengerId) {
-        bookingService.cancelBooking(flightId,passengerId);
+    public void cancelBooking(long passengerId) {
+        bookingService.cancelBooking(passengerId);
     }
 
     public Collection<BookingDto>getMyFlights(long flightId, String names) {

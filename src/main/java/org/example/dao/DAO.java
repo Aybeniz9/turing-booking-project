@@ -8,12 +8,12 @@ public interface DAO<T> {
 
     void save(List<T> t);
 
-    void delete(long flightId, long passengerId);
+    void delete(long passengerId);
 
     Collection<T> getAll();
 
     Optional<T> findOneBy(Predicate<T> predicate);
 
-   Optional< Collection<T>> findAllBy(Predicate<T> predicate);
+    Optional< Collection<T>> findAllBy(Predicate<T> predicate);
 
 }
