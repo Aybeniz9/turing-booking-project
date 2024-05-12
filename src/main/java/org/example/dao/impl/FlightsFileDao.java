@@ -20,17 +20,17 @@ public class FlightsFileDao extends FlightsDao {
     }
 
     @Override
-
-    public void save(List<FlightsEntity> flightsEntities) {
+    public void save(List<FlightsEntity> bookings) {
         try {
             FileWriter fw = new FileWriter(FLIGHTS_FILE_PATH);
-            BufferedWriter bf = new BufferedWriter(fw);
-            bf.write(objectMapper.writeValueAsString(flightsEntities));
-            bf.close();
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(objectMapper.writeValueAsString(bookings));
+            bw.close();
         } catch (IOException e) {
-            e.getMessage();
+            System.err.println("Error while adding new flight: " + e.getMessage());
         }
     }
+
 
     @Override
     public Collection<FlightsEntity> getAll() {
@@ -39,9 +39,10 @@ public class FlightsFileDao extends FlightsDao {
             BufferedReader x = new BufferedReader(fr);
             String jsonData = x.readLine();
             if (jsonData != null && !jsonData.isBlank()) {
-                FlightsEntity[] flights = objectMapper.readValue(jsonData, FlightsEntity[].class);
+                FlightsEntity[] bookings = objectMapper.readValue(jsonData, FlightsEntity[].class);
                 x.close();
-                return Arrays.stream(flights).toList();
+                var tempList = Arrays.asList(bookings);
+                return new ArrayList<>(tempList);
             }
             x.close();
         } catch (IOException e) {

@@ -22,11 +22,34 @@ public class BookingFileDao extends BookingDao {
 
     @Override
     public void save(List<BookingEntity> bookings) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE_PATH))) {
+        try {
+            FileWriter fw = new FileWriter(BOOKINGS_FILE_PATH);
+            BufferedWriter bw = new BufferedWriter(fw);
             bw.write(objectMapper.writeValueAsString(bookings));
+            bw.close();
         } catch (IOException e) {
-            System.out.println("Error save bookings" + e.getMessage());
+            System.err.println("Error while adding new flight: " + e.getMessage());
         }
+    }
+
+
+    @Override
+    public Collection<BookingEntity> getAll() {
+        try {
+            FileReader fr = new FileReader(BOOKINGS_FILE_PATH);
+            BufferedReader x = new BufferedReader(fr);
+            String jsonData = x.readLine();
+            if (jsonData != null && !jsonData.isBlank()) {
+                BookingEntity[] bookings = objectMapper.readValue(jsonData, BookingEntity[].class);
+                x.close();
+                var tempList = Arrays.asList(bookings);
+                return new ArrayList<>(tempList);
+            }
+            x.close();
+        } catch (IOException e) {
+            System.out.println("Error while reading flights from file: " + e.getMessage());
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -36,18 +59,6 @@ public class BookingFileDao extends BookingDao {
         save((List<BookingEntity>) bookingForCancel);
 
     }
-
-    @Override
-    public Collection<BookingEntity> getAll() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(BOOKINGS_FILE_PATH))) {
-            return new ArrayList<>(Arrays.asList(objectMapper.readValue(bufferedReader, BookingEntity.class)));
-        } catch (IOException e) {
-            System.err.println("Error reading bookins from file" + e.getMessage());
-            return Collections.emptyList();
-        }
-
-    }
-
     @Override
     public Optional<BookingEntity> findOneBy(Predicate<BookingEntity> predicate) {
         return getAll().stream().filter(predicate).findFirst();

@@ -11,6 +11,7 @@ import org.example.entities.BookingEntity;
 import org.example.entities.FlightsEntity;
 import org.example.exception.BookingNotFoundException;
 import org.example.exception.FlightNotFoundException;
+import org.example.exception.InsufficientSeatsException;
 import org.example.model.dto.BookingDto;
 import org.example.model.dto.FlightsDto;
 import org.example.service.BookingService;
@@ -20,8 +21,9 @@ import org.example.service.impl.FlightsServiceİmpl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.*;
 
 public class BookingManagmentApp {
     Scanner scanner = new Scanner(System.in);
@@ -33,8 +35,8 @@ public class BookingManagmentApp {
     BookingController bookingController = new BookingController(bookingService);
     LocalDateTime dateTime = LocalDateTime.of(2024, 5, 12, 23, 45, 34);
     LocalDateTime dateTime2 = LocalDateTime.of(2024, 5, 12, 23, 46, 35);
-    FlightsEntity flightsEntity = new FlightsEntity(dateTime, 20, "Ispanya", "Cehennem");
-    FlightsEntity flightsEntity2 = new FlightsEntity(dateTime2, 30, "Amerika", "Italia");
+    FlightsEntity flightsEntity = new FlightsEntity(dateTime, 100, "New York", "London");
+    FlightsEntity flightsEntity2 = new FlightsEntity(dateTime2, 150, "Paris", "Berlin");
     BookingEntity bookingEntity1 = new BookingEntity(1, "Ali");
     BookingEntity bookingEntity2 = new BookingEntity(2, "Farid");
 
@@ -50,7 +52,8 @@ public class BookingManagmentApp {
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            String name = scanner.nextLine();
+
 
             switch (choice) {
                 case 1:
@@ -61,7 +64,19 @@ public class BookingManagmentApp {
                     showTheFlightInfo();
                     break;
                 case 3:
-                    searchBookFlight();
+                    try {
+                        System.out.println("Enter your Name: ");
+                        name = scanner.nextLine();
+                        System.out.println("Enter flight id: ");
+                        int flightIdForBooking = scanner.nextInt();
+                        System.out.println("Enter amount a seats for booking: ");
+                        int amount = scanner.nextInt();
+                        BookingDto bookingDto = new BookingDto(1, "Farid");
+                        bookingController.searchAndBookFlight(bookingDto);
+                        System.out.println("Booking successful");
+                    } catch (InsufficientSeatsException | FlightNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
 
@@ -77,7 +92,7 @@ public class BookingManagmentApp {
                     break;
                 case 5:
                     System.out.print("Please enter your name");
-                    String name = scanner.nextLine();
+                    name = scanner.nextLine();
                     System.out.println("Please enter your id");
                     long flightId = scanner.nextLong();
                     try {
@@ -143,4 +158,3 @@ public class BookingManagmentApp {
 
     }
 }
-
