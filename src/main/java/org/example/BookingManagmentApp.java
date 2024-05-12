@@ -149,6 +149,7 @@ public class BookingManagmentApp {
         BookingDto bookingDto2=new BookingDto(bookingEntity2.getFlightId(),bookingEntity2.getPassengerName());
         bookingService.createBooking(bookingDto1);
         bookingService.createBooking(bookingDto2);
+
     }
 }
 
