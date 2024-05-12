@@ -1,6 +1,7 @@
 package org.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
 import org.example.dao.BookingDao;
@@ -27,10 +28,10 @@ import java.util.Scanner;
 
 public class BookingManagmentApp {
     Scanner scanner = new Scanner(System.in);
-    FlightsDao flightsDao = new FlightsFileDao(new ObjectMapper());
+    FlightsDao flightsDao = new FlightsFileDao(new ObjectMapper().registerModule(new JavaTimeModule()));
     FlightsService flightsService = new FlightsServiceİmpl(flightsDao);
     FlightsController flightsController = new FlightsController(flightsService);
-    BookingDao bookingDao = new BookingFileDao(new ObjectMapper());
+    BookingDao bookingDao = new BookingFileDao(new ObjectMapper().registerModule(new JavaTimeModule()));
     BookingService bookingService = new BookingServiceİmpl(bookingDao);
     BookingController bookingController = new BookingController(bookingService);
     LocalDateTime dateTime = LocalDateTime.of(2024, 5, 12, 23, 45, 34);

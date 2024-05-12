@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class FlightsFileDao extends FlightsDao {
-    private static final String RESOURCE_PATH = "C:\\Users\\User\\IdeaProjects\\Turing\\java-course-turing\\turing-booking-project-1\\src\\main\\java\\org\\example\\resource\\";
+    private static final String RESOURCE_PATH = "src/main/java/org/example/resource/";
     private static final String FLIGHTS_FILE_PATH = RESOURCE_PATH.concat("flight.json");
     private final ObjectMapper objectMapper;
 

@@ -84,18 +84,16 @@ class FlightsServiceİmplTest {
     public void testGetOneFlightByFlightId() {
         long id = 1;
         FlightsEntity flightsEntity = new FlightsEntity(LocalDateTime.now(), 100, "New York", "London");
-        when(flightsDao.getAll()).thenReturn(Arrays.asList(flightsEntity));
+        when(flightsDao.getAll()).thenReturn(List.of(flightsEntity));
 
         Optional<FlightsDto> flightsDtoOptional = flightsService.getOneFlightByFlightId(id);
-
-       // assertEquals(id, flightsDtoOptional.get().getId());
     }
 
     @Test
     public void testGetAllFlightByFlightId() {
         long id = 1;
         FlightsEntity flightsEntity = new FlightsEntity(LocalDateTime.now(), 100, "New York", "London");
-        when(flightsDao.getAll()).thenReturn(Arrays.asList(flightsEntity));
+        when(flightsDao.getAll()).thenReturn(List.of(flightsEntity));
 
         Collection<FlightsDto> flightsDtos = flightsService.getAllFlightByFlightId(id);
 
