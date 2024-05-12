@@ -20,7 +20,7 @@ public class FlightsServiceİmpl implements FlightsService {
     @Override
     public void createFlights(FlightsDto flightsDto) {
         FlightsEntity flightsEntity = new FlightsEntity(
-                flightsDto.getDateTime(), flightsDto.getFreeSpaces(), flightsDto.getDestination());
+                flightsDto.getDateTime(), flightsDto.getFreeSpaces(), flightsDto.getDestination(), flightsDto.getOrigin(), flightsDto.getId());
         List<FlightsEntity> flightsEntities = flightsDao.getAll().stream().toList();
         ArrayList<FlightsEntity> newFlightEntities = new ArrayList<>(flightsEntities);
         newFlightEntities.add(flightsEntity);

@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class FlightsFileDao extends FlightsDao {
-    private static final String RESOURCE_PATH = "C:\\Users\\User\\IdeaProjects\\Turing\\java-course-turing\\turing-booking-project-1\\src\\main\\java\\org\\example\\resource\\";
+    private static final String RESOURCE_PATH = "D:\\turing-booking-project-1\\src\\main\\java\\org\\example\\resource\\";
     private static final String FLIGHTS_FILE_PATH = RESOURCE_PATH.concat("flight.json");
     private final ObjectMapper objectMapper;
 
@@ -20,11 +20,11 @@ public class FlightsFileDao extends FlightsDao {
     }
 
     @Override
-    public void save(List<FlightsEntity> bookings) {
+    public void save(List<FlightsEntity> flights) {
         try {
             FileWriter fw = new FileWriter(FLIGHTS_FILE_PATH);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(objectMapper.writeValueAsString(bookings));
+            bw.write(objectMapper.writeValueAsString(flights));
             bw.close();
         } catch (IOException e) {
             System.err.println("Error while adding new flight: " + e.getMessage());

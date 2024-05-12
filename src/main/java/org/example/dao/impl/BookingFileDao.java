@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 public class BookingFileDao extends BookingDao {
 
-    private static final String RESOURCE_PATH = "src/main/java/org/example/resource/";
+    private static final String RESOURCE_PATH = "D:\\turing-booking-project-1\\src\\main\\java\\org\\example\\resource\\";
     private static final String BOOKINGS_FILE_PATH = RESOURCE_PATH + "bookings.json";
     private final ObjectMapper objectMapper;
 
