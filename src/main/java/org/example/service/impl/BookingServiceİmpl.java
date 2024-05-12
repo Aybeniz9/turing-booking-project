@@ -16,7 +16,6 @@ public class BookingServiceİmpl implements BookingService {
     public BookingServiceİmpl(BookingDao bookingDao) {
         this.bookingDao = bookingDao;
     }
-
     @Override
     public void createBooking(BookingDto bookingDto) {
         List<BookingEntity> listForSave = new ArrayList<>();
