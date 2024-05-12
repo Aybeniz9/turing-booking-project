@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface BookingService {
     void createBooking(BookingDto bookings);
 
-    void cancelBooking(long flightId,long passengerId);
+    void cancelBooking(long passengerId);
 
     Collection<BookingDto> getAllBookings();
 

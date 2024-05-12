@@ -25,8 +25,8 @@ public class BookingServiceİmpl implements BookingService {
     }
 
     @Override
-    public void cancelBooking(long flightId, long passengerId) {
-        bookingDao.delete(flightId, passengerId);
+    public void cancelBooking(long passengerId) {
+        bookingDao.delete(passengerId);
     }
 
     @Override
