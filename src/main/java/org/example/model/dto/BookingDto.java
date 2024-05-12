@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BookingDto {
-    public static  long MAX_ID = 0;
+    public static long MAX_ID = 0;
     private long passengerId;
     private long flightId;
 

@@ -24,6 +24,7 @@ public class BookingEntity {
         this.passengerName = passengerName;
     }
 
+
     public long getPassengerId() {
         return passengerId;
     }
