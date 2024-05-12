@@ -19,6 +19,7 @@ public class BookingFileDao extends BookingDao {
         this.objectMapper = objectMapper;
     }
 
+
     @Override
     public void save(List<BookingEntity> bookings) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE_PATH))) {
