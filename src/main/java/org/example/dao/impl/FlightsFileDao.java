@@ -1,15 +1,10 @@
 package org.example.dao.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dao.FlightsDao;
 import org.example.entities.FlightsEntity;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.*;
 import java.util.function.Predicate;
@@ -39,7 +34,7 @@ public class FlightsFileDao extends FlightsDao {
     }
 
     @Override
-    public void delete(long flightId, long passengerId) {
+    public void delete(long flightId) {
 
     }
     @Override
@@ -67,8 +62,8 @@ public class FlightsFileDao extends FlightsDao {
     }
 
     @Override
-    public Collection<FlightsEntity> findAllBy(Predicate<FlightsEntity> predicate) {
+    public Optional<Collection<FlightsEntity>> findAllBy(Predicate<FlightsEntity> predicate) {
         Collection <FlightsEntity> allBy= getAll().stream().filter(predicate).toList();
-        return allBy;
+        return Optional.of(allBy);
     }
 }

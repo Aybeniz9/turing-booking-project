@@ -1,9 +1,21 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.controller.BookingController;
 import org.example.controller.FlightsController;
+import org.example.dao.BookingDao;
+import org.example.dao.FlightsDao;
+import org.example.dao.impl.BookingFileDao;
+import org.example.dao.impl.FlightsFileDao;
 import org.example.entities.FlightsEntity;
+import org.example.exception.BookingNotFoundException;
+import org.example.exception.FlightNotFoundException;
+import org.example.model.dto.BookingDto;
 import org.example.model.dto.FlightsDto;
+import org.example.service.BookingService;
+import org.example.service.FlightsService;
+import org.example.service.impl.BookingServiceİmpl;
+import org.example.service.impl.FlightsServiceİmpl;
 
 import java.awt.List;
 import java.time.LocalDateTime;
@@ -16,13 +28,19 @@ import java.util.Scanner;
 
 public class BookingManagmentApp {
     Scanner scanner = new Scanner(System.in);
-    private final FlightsController flightController;
-    private final BookingController bookingController;
 
-    public BookingManagmentApp(FlightsController flightController, BookingController bookingController) {
-        this.flightController = flightController;
-        this.bookingController = bookingController;
-    }
+    FlightsDao flightsDao=new FlightsFileDao(new ObjectMapper());
+    FlightsService flightsService=new FlightsServiceİmpl( flightsDao);
+    FlightsController flightsController=new FlightsController(flightsService);
+    BookingDao bookingDao=new BookingFileDao( new ObjectMapper());
+    BookingService bookingService=new BookingServiceİmpl( bookingDao);
+    BookingController bookingController=new BookingController(bookingService);
+    LocalDateTime dateTime= LocalDateTime.of(2024,5,2,23,45,34);
+    LocalDateTime dateTime2= LocalDateTime.of(2024, 5,12,23,42,41);
+    FlightsEntity flightsEntity= new FlightsEntity(dateTime,29,"Amerika","Cehennem");
+    FlightsEntity flightsEntity2=new FlightsEntity(dateTime2,34,"Amerika", "Italia");
+
+
 
     public void displayMainMenu() {
         while (true) {
@@ -50,10 +68,34 @@ public class BookingManagmentApp {
                     break;
                 case 4:
 
-                    cancelBooking();
+                    try {
+                        System.out.println("Enter booking id: ");
+                        int bookingId = scanner.nextInt();
+                        bookingController.cancelBooking(bookingId);
+                    }catch (InputMismatchException e){
+                        System.out.println("You input is not integer");
+                    }catch(BookingNotFoundException e){
+                        System.out.println("Booking not fount ");
+                    }
                     break;
                 case 5:
-                    displayMyFlights();
+                    System.out.print("Please enter your name");
+                    String name= scanner.nextLine();
+                    System.out.println("Please enter your id");
+                    long flightId= scanner.nextLong();
+                    try {
+                        Collection<BookingDto> flights = bookingController.getMyFlights(flightId ,name);
+                        for (BookingDto flight : flights) {
+                            System.out.println(flight);
+                        }
+
+                } catch (InputMismatchException e){
+                        System.out.println(" Id is not integer");
+                    }
+      //              catch (FlightNotFoundException e){
+//                        System.out.println("Flight Not find here");
+//                    }
+
 
                     break;
                 case 0:
@@ -70,7 +112,7 @@ public class BookingManagmentApp {
         System.out.print("Enter the location : ");
         String location = scanner.nextLine();
         LocalDateTime dateTime = LocalDateTime.now();
-        Collection<FlightsDto> flights = flightController.getOnlineBoard(location, dateTime);
+        Collection<FlightsDto> flights = flightsController.getOnlineBoard(location, dateTime);
         for (FlightsDto flight : flights) {
             System.out.println(flight.getId() + " - " + flight.getDestination() + " - " +
                     flight.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
@@ -81,7 +123,7 @@ public class BookingManagmentApp {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Enter the flight id");
         long id = sc.nextLong();
-        Collection<FlightsDto> flights = flightController.getAllFlightsByFLightId(id);
+        Collection<FlightsDto> flights = flightsController.getAllFlightsByFLightId(id);
         System.out.println(" Flights Info: ");
         if (flights != null) {
             for (FlightsDto f : flights) {
@@ -93,15 +135,16 @@ public class BookingManagmentApp {
         }
     }
 
-    public void searchBookFlight() {
+    private void searchBookFlight() {
 
 
     }
 
-    public void cancelBooking() {
-
+    public void configure (){
+        FlightsDto flightsDto1 = new FlightsDto(flightsEntity.getId(), flightsEntity.getDateTime(), flightsEntity.getFreeSpaces(), flightsEntity.getDestination(), flightsEntity.getOrigin());
+        FlightsDto flightsDto2 = new FlightsDto(flightsEntity2.getId(), flightsEntity2.getDateTime(), flightsEntity2.getFreeSpaces(), flightsEntity2.getDestination(), flightsEntity2.getOrigin());
+        flightsService.createFlights(flightsDto1);
+        flightsService.createFlights(flightsDto2);
     }
-
-
 }
 

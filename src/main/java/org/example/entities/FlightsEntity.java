@@ -12,6 +12,7 @@ public class FlightsEntity {
     private int freeSpaces;
     private String destination;
     private  String origin;
+    private  int passengerNumber;
     public FlightsEntity() {
     }
 
@@ -22,6 +23,7 @@ public class FlightsEntity {
         this.destination = destination;
         this.origin = origin;
     }
+
 
     public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination) {
         this.dateTime = dateTime;
@@ -41,6 +43,7 @@ public class FlightsEntity {
         this.destination = destination;
     }
 
+
     public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces) {
         this.id = id;
         this.dateTime = dateTime;
@@ -57,6 +60,27 @@ public class FlightsEntity {
         this.freeSpaces = freeSpaces;
         this.destination = destination;
         this.origin = origin;
+    }
+
+    public FlightsEntity(Long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin, int passengerNumber) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.freeSpaces = freeSpaces;
+        this.destination = destination;
+        this.origin = origin;
+        this.passengerNumber = passengerNumber;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getPassengerNumber() {
+        return passengerNumber;
+    }
+
+    public void setPassengerNumber(int passengerNumber) {
+        this.passengerNumber = passengerNumber;
     }
 
     public String getOrigin() {
