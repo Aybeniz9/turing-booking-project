@@ -16,8 +16,8 @@ public class BookingController {
         bookingService.cancelBooking(passengerId);
     }
 
-    public Collection<BookingDto>getMyFlights(long flightId, String names) {
-    return bookingService.getMyFlights(flightId,names);
+    public Collection<BookingDto> getMyFlights(long flightId, String names) {
+        return bookingService.getMyFlights(flightId, names);
     }
 
 
@@ -25,7 +25,7 @@ public class BookingController {
         bookingService.createBooking(bookingDto);
     }
 
-    public BookingDto findBookingByOne(long id){
+    public BookingDto findBookingByOne(long id) {
         return bookingService.findBookingByOne(id);
     }
 
