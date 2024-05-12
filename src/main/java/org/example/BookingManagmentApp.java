@@ -24,8 +24,6 @@ public class BookingManagmentApp {
         this.bookingController = bookingController;
     }
 
-
-
     public void displayMainMenu() {
         while (true) {
             System.out.println("Main Menu:");
@@ -72,12 +70,13 @@ public class BookingManagmentApp {
         System.out.print("Enter the location : ");
         String location = scanner.nextLine();
         LocalDateTime dateTime = LocalDateTime.now();
-        Collection<FlightsDto> flights =flightController.getOnlineBoard(location, dateTime);
+        Collection<FlightsDto> flights = flightController.getOnlineBoard(location, dateTime);
         for (FlightsDto flight : flights) {
-            System.out.println(flight.getId()+ " - " + flight.getDestination() + " - " +
+            System.out.println(flight.getId() + " - " + flight.getDestination() + " - " +
                     flight.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         }
     }
+
     public void showTheFlightInfo() {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Enter the flight id");
@@ -94,13 +93,14 @@ public class BookingManagmentApp {
         }
     }
 
-     public void searchBookFlight(){
+    public void searchBookFlight() {
 
 
-}
-     public void cancelBooking(){
+    }
 
-     }
+    public void cancelBooking() {
+
+    }
 
 
 }

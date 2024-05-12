@@ -1,14 +1,8 @@
 package org.example.controller;
 
-import org.example.entities.BookingEntity;
-import org.example.entities.FlightsEntity;
 import org.example.model.dto.FlightsDto;
 import org.example.service.FlightsService;
-
-import javax.swing.text.html.Option;
-import java.awt.List;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 import java.util.*;
 

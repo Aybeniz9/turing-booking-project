@@ -2,7 +2,6 @@ package org.example.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
 public class FlightsDto {
     private long id;
     private LocalDateTime dateTime;

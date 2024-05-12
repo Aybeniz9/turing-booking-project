@@ -16,6 +16,7 @@ public class BookingServiceİmpl implements BookingService {
     public BookingServiceİmpl(BookingDao bookingDao) {
         this.bookingDao = bookingDao;
     }
+
     @Override
     public void createBooking(BookingDto bookingDto) {
         List<BookingEntity> listForSave = new ArrayList<>();
@@ -34,7 +35,6 @@ public class BookingServiceİmpl implements BookingService {
                 .map(booking -> new BookingDto(booking.getPassengerId(), booking.getFlightId(), booking.getPassengerName()))
                 .collect(Collectors.toList());
     }
-
     @Override
     public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
         Collection<BookingEntity> entities = bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId() == flightId &&
@@ -45,7 +45,6 @@ public class BookingServiceİmpl implements BookingService {
 
     @Override
     public BookingDto findBookingByOne(long id) {
-         return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getPassengerId() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
- }
-
+        return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getPassengerId() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
+    }
 }
