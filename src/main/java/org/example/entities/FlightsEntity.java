@@ -7,81 +7,78 @@ import java.util.Objects;
 
 
 public class FlightsEntity {
-    private Long id;
+    public static long MAX_ID = 1;
+    private long id;
     private LocalDateTime dateTime;
     private int freeSpaces;
     private String destination;
-    private  String origin;
-    private  int passengerNumber;
-    public FlightsEntity() {
-    }
+    private String origin;
 
-    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
-        this.id = id;
+//    public FlightsEntity() {
+//        private int passengerNumber;
+//    }
+
+    public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
+        this.id = MAX_ID++;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
         this.origin = origin;
     }
 
+
+//    public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination) {
+//        this.dateTime = dateTime;
+//        this.freeSpaces = freeSpaces;
+//        this.destination = destination;
+//    }
+
+    public FlightsEntity(LocalDateTime dateTime) {
+        this.id = MAX_ID++;
+        this.dateTime = dateTime;
+    }
 
     public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination) {
-        this.dateTime = dateTime;
-        this.freeSpaces = freeSpaces;
-        this.destination = destination;
-    }
-
-    public FlightsEntity(long id, LocalDateTime dateTime) {
-        this.id = id;
-        this.dateTime = dateTime;
-    }
-
-    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces, String destination) {
-        this.id = id;
+        this.id = MAX_ID++;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
     }
 
 
-    public FlightsEntity(long id, LocalDateTime dateTime, int freeSpaces) {
-        this.id = id;
+    public FlightsEntity( LocalDateTime dateTime, int freeSpaces) {
+        this.id = MAX_ID;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;
     }
 
-    public FlightsEntity(long id, int freeSpaces, String destination) {
-        this.id = id;
+    public FlightsEntity(int freeSpaces, String destination) {
+        this.id = MAX_ID;
         this.freeSpaces = freeSpaces;
         this.destination = destination;
-    }
-    public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
-        this.dateTime = dateTime;
-        this.freeSpaces = freeSpaces;
-        this.destination = destination;
-        this.origin = origin;
     }
 
-    public FlightsEntity(Long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin, int passengerNumber) {
-        this.id = id;
-        this.dateTime = dateTime;
-        this.freeSpaces = freeSpaces;
-        this.destination = destination;
-        this.origin = origin;
-        this.passengerNumber = passengerNumber;
-    }
+//
+//    public FlightsEntity(Long id, LocalDateTime dateTime, int freeSpaces, String destination, String origin, int passengerNumber) {
+//        this.id = id;
+//        this.dateTime = dateTime;
+//        this.freeSpaces = freeSpaces;
+//        this.destination = destination;
+//        this.origin = origin;
+//        this.passengerNumber = passengerNumber;
+//    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public int getPassengerNumber() {
-        return passengerNumber;
-    }
-
-    public void setPassengerNumber(int passengerNumber) {
-        this.passengerNumber = passengerNumber;
-    }
+//    public int getPassengerNumber() {
+//        return passengerNumber;
+//    }
+//
+//    public void setPassengerNumber(int passengerNumber) {
+//        this.passengerNumber = passengerNumber;
+//    }
 
     public String getOrigin() {
         return origin;
@@ -93,10 +90,6 @@ public class FlightsEntity {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public LocalDateTime getDateTime() {
