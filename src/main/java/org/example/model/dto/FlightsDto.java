@@ -32,6 +32,7 @@ public class FlightsDto {
         this.dateTime = dateTime;
     }
 
+
     public FlightsDto(long id, LocalDateTime dateTime, int freeSpaces, String destination) {
         this.id = id;
         this.dateTime = dateTime;
