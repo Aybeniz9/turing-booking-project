@@ -25,6 +25,14 @@ public class FlightsEntity {
         this.id = MAX_ID++;
     }
 
+    public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination, String origin, long flightId) {
+        this.dateTime = dateTime;
+        this.freeSpaces = freeSpaces;
+        this.destination = destination;
+        this.origin = origin;
+        this.id = flightId;
+    }
+
     public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination) {
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;

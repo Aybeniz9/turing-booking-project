@@ -10,6 +10,8 @@ import org.example.service.impl.FlightsServiceİmpl;
 public class Main {
     public static void main(String[] args) {
       BookingManagmentApp app = new BookingManagmentApp();
+      app.configure();
       app.displayMainMenu();
+
     }
 }
