@@ -18,6 +18,7 @@ public class FlightsFileDao extends FlightsDao {
 
         this.objectMapper = objectMapper;
     }
+
     @Override
 
     public void save(List<FlightsEntity> flightsEntities) {
@@ -46,7 +47,7 @@ public class FlightsFileDao extends FlightsDao {
         } catch (IOException e) {
             System.out.println("Error while reading flights from file: " + e.getMessage());
         }
-        return new ArrayList <>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -60,6 +61,7 @@ public class FlightsFileDao extends FlightsDao {
         Collection<FlightsEntity> allBy = getAll().stream().filter(predicate).toList();
         return Optional.of(allBy);
     }
+
     @Override
     public void delete(long flightId) {
 

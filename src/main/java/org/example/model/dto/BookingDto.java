@@ -19,6 +19,7 @@ public class BookingDto {
         this.passengerName = passengerName;
     }
 
+
     public BookingDto(long id, long flightId, String passengerName) {
         this.passengerId = id;
         this.flightId = flightId;

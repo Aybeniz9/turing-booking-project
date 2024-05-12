@@ -46,7 +46,7 @@ public class FlightsEntity {
     }
 
 
-    public FlightsEntity( LocalDateTime dateTime, int freeSpaces) {
+    public FlightsEntity(LocalDateTime dateTime, int freeSpaces) {
         this.id = MAX_ID;
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;

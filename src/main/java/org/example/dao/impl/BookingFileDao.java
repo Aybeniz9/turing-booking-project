@@ -27,11 +27,12 @@ public class BookingFileDao extends BookingDao {
             System.out.println("Error save bookings" + e.getMessage());
         }
     }
+
     @Override
     public void delete(long passengerId) {
-       Collection< BookingEntity> bookingForCancel = getAll();
+        Collection<BookingEntity> bookingForCancel = getAll();
         bookingForCancel.removeIf(bookingEntity -> bookingEntity.getPassengerId() == passengerId);
-save((List<BookingEntity>) bookingForCancel);
+        save((List<BookingEntity>) bookingForCancel);
 
     }
 
@@ -53,6 +54,6 @@ save((List<BookingEntity>) bookingForCancel);
 
     @Override
     public Optional<Collection<BookingEntity>> findAllBy(Predicate<BookingEntity> predicate) {
-        return  Optional.of(getAll().stream().filter(predicate).findFirst().stream().toList());
+        return Optional.of(getAll().stream().filter(predicate).findFirst().stream().toList());
     }
 }

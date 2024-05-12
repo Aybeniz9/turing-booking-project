@@ -1,185 +1,136 @@
-//import net.bytebuddy.dynamic.DynamicType;
-//import org.example.dao.FlightsDao;
-//import org.example.service.FlightsService;
-//import org.example.service.impl.FlightsServiceİmpl;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.mockito.ArgumentCaptor;
-//import org.mockito.Mock;
-//import org.junit.jupiter.api.Test;
-//
-//import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
-//import static org.junit.jupiter.api.Assertions.*;
-//import org.example.dao.FlightsDao;
-//import org.example.entities.FlightsEntity;
-//import org.example.model.dto.FlightsDto;
-//import org.mockito.Mockito;
-//import org.mockito.MockitoAnnotations;
-//import org.testng.annotations.Optional;
-//
-//import java.util.*;
-//import java.time.LocalDateTime;
-//import java.util.Arrays;
-//import java.util.Collection;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.ArgumentMatchers.anyList;
-//import static org.mockito.Mockito.when;
-//package az.edu.turing.service.impl;
-//
-//import java.time.LocalDateTime;
-//import java.util.Arrays;
-//import java.util.Collection;
-//import java.util.List;
-//import java.util.Optional;
-//import org.example.dao.FlightsDao;
-//import org.example.entities.FlightsEntity;
-//import org.example.model.dto.FlightsDto;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import java.time.LocalDateTime;
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.Optional;
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.*;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.mockito.Mockito.*;
-//
-//class FlightsServiceİmplTest {
-//    @Mock
-//    private FlightsDao flightsDao;
-//
-//    private FlightsServiceİmpl flightsService;
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.initMocks(this);
-//        flightsService = new FlightsServiceİmpl(flightsDao);
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void createFlights() {
-//        FlightsDto flightsDto = new FlightsDto(LocalDateTime.now(), 100, "Destination");
-//
-//        // Act
-//        flightsService.createFlights(flightsDto);
-//
-//        // Assert
-//        verify(flightsDao, times(1)).save(any());
-//
-//    }
-//    @org.junit.jupiter.api.Test
-//    void getAllFlight() {
-//        FlightsEntity flightsEntity = new FlightsEntity(LocalDateTime.now(), 100, "Destination");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightsEntity)));
-//
-//        // Act
-//        Collection<FlightsDto> result = flightsService.getAllFlight();
-//
-//        // Assert
-//        assertFalse(result.isEmpty());
-//        assertEquals(1, result.size());
-//    }
-//
-//
-//    @org.junit.jupiter.api.Test
-//    void getAllFlightByOrigin() {
-//        // Arrange
-//        String origin = "Origin";
-//        FlightsEntity flightsEntity = new FlightsEntity(LocalDateTime.now(), 100, "Destination", origin);
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightsEntity)));
-//
-//        // Act
-//        Collection<FlightsDto> result = flightsService.getAllFlightByOrigin(origin);
-//
-//        // Assert
-//        assertFalse(result.isEmpty());
-//        assertTrue(result.stream().allMatch(f -> f.getOrigin().equalsIgnoreCase(origin)));
-//
-//    }
-//
-//
-//    @org.junit.jupiter.api.Test
-//    void getAllFlightByDestination() {
-//    }
-//
-//    @Test
-//    void getOneFlightByFlightId_ReturnsFlightById() {
-//        // Arrange
-//        long id = 1;
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        FlightsEntity flightEntity = new FlightsEntity( dateTime, 100, "Destination", "Origin");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightEntity)));
-//
-//        // Act
-//        Optional<FlightsDto> result = flightsService.getOneFlightByFlightId(id);
-//
-//        // Assert
-//        assertTrue(result.isPresent());
-//        assertEquals(id, result.get().getId());
-//    }
-//    @Test
-//    void getOneFlightByFlightId_ReturnsEmptyOptionalForNonexistentId() {
-//        // Arrange
-//        long id = 1;
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        FlightsEntity flightEntity = new FlightsEntity(id + 1, dateTime, 100, "Destination", "Origin");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightEntity)));
-//
-//        // Act
-//        Optional<FlightsDto> result = flightsService.getOneFlightByFlightId(id);
-//
-//        // Assert
-//        assertTrue(result.isEmpty());
-//    }
-//
-//
-//    @Test
-//    void getAllFlightByFlightId_ReturnsFlightsById() {
-//        // Arrange
-//        long id = 1;
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        FlightsEntity flightEntity = new FlightsEntity(id, dateTime, 100, "Destination", "Origin");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightEntity)));
-//
-//        // Act
-//        Collection<FlightsDto> result = flightsService.getAllFlightByFlightId(id);
-//
-//        // Assert
-//        assertFalse(result.isEmpty());
-//        assertTrue(result.stream().allMatch(f -> f.getId() == id));
-//    }
-//    @Test
-//    void getAllFlightByFlightId_ReturnsEmptyCollectionForNonexistentId() {
-//        // Arrange
-//        long id = 1;
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        FlightsEntity flightEntity = new FlightsEntity(id + 1, dateTime, 100, "Destination", "Origin");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flightEntity)));
-//
-//        // Act
-//        Collection<FlightsDto> result = flightsService.getAllFlightByFlightId(id);
-//
-//        // Assert
-//        assertTrue(result.isEmpty());
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void flightsInNext24Hours() {
-//        // Arrange
-//        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime within24Hours = now.plusHours(12);
-//        FlightsEntity flight1 = new FlightsEntity(within24Hours, 100, "Destination", "Origin1");
-//        FlightsEntity flight2 = new FlightsEntity(now.plusHours(25), 100, "Destination", "Origin2");
-//        when(flightsDao.getAll()).thenReturn(new ArrayList<>(List.of(flight1, flight2)));
-//
-//        // Act
-//        Collection<FlightsDto> result = flightsService.flightsInNext24Hours("Origin1", now);
-//
-//        // Assert
-//        assertFalse(result.isEmpty());
-//        assertTrue(result.stream().allMatch(f -> f.getOrigin().equalsIgnoreCase("Origin1")));
-//        assertTrue(result.stream().allMatch(f -> f.getDateTime().isAfter(now) && f.getDateTime().isBefore(within24Hours)));
-//    }
-//
-//    }
+
+import org.example.dao.FlightsDao;
+import org.example.entities.FlightsEntity;
+import org.example.model.dto.FlightsDto;
+import org.example.service.FlightsService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.example.service.impl.FlightsServiceİmpl;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+class FlightsServiceİmplTest {
+    private FlightsDao flightsDao;
+    private FlightsService flightsService;
+
+    @BeforeEach
+    public void setUp() {
+        flightsDao = Mockito.mock(FlightsDao.class);
+        flightsService = new FlightsServiceİmpl(flightsDao);
+    }
+
+
+    @Test
+    void createFlights() {
+    FlightsDto flightsDto = new FlightsDto(LocalDateTime.now(), 100, "New York", "London");
+
+        flightsService.createFlights(flightsDto);
+
+        Mockito.verify(flightsDao).save(Mockito.anyList());
+}
+    @Test
+     void getAllFlight() {
+        List<FlightsEntity> flightsEntities = Arrays.asList(
+                new FlightsEntity(LocalDateTime.now(), 100, "New York", "London"),
+                new FlightsEntity(LocalDateTime.now().plusHours(2), 150, "Paris", "Berlin")
+        );
+        when(flightsDao.getAll()).thenReturn(flightsEntities);
+
+        Collection<FlightsDto> flightsDtos = flightsService.getAllFlight();
+
+        assertEquals(2, flightsDtos.size());
+    }
+    @Test
+    void getAllFlightByOrigin() {
+        String origin = "New York";
+        List<FlightsEntity> flightsEntities = Arrays.asList(
+                new FlightsEntity(LocalDateTime.now(), 100, "New York", "London"),
+                new FlightsEntity(LocalDateTime.now().plusHours(2), 150, "Paris", "Berlin")
+        );
+        when(flightsDao.getAll()).thenReturn(flightsEntities);
+
+        Collection<FlightsDto> flightsDtos = flightsService.getAllFlightByOrigin(origin);
+
+        assertEquals(1, flightsDtos.size());
+        assertEquals(origin, flightsDtos.iterator().next().getOrigin());
+    }
+
+    @Test
+    public void testGetAllFlightByDestination() {
+        String destination = "London";
+        List<FlightsEntity> flightsEntities = Arrays.asList(
+                new FlightsEntity(LocalDateTime.now(), 100, "New York", "London"),
+                new FlightsEntity(LocalDateTime.now().plusHours(2), 150, "Paris", "Berlin")
+        );
+        when(flightsDao.getAll()).thenReturn(flightsEntities);
+
+        Collection<FlightsDto> flightsDtos = flightsService.getAllFlightByDestination(destination);
+
+        assertEquals(1, flightsDtos.size());
+        assertEquals(destination, flightsDtos.iterator().next().getDestination());
+    }
+
+    @Test
+    public void testGetOneFlightByFlightId() {
+        long id = 1;
+        FlightsEntity flightsEntity = new FlightsEntity(id, LocalDateTime.now(), 100, "New York", "London");
+        when(flightsDao.getAll()).thenReturn(Arrays.asList(flightsEntity));
+
+        Optional<FlightsDto> flightsDtoOptional = flightsService.getOneFlightByFlightId(id);
+
+        assertEquals(id, flightsDtoOptional.get().getId());
+    }
+
+    @Test
+    public void testGetAllFlightByFlightId() {
+        long id = 1;
+        FlightsEntity flightsEntity = new FlightsEntity(id, LocalDateTime.now(), 100, "New York", "London");
+        when(flightsDao.getAll()).thenReturn(Arrays.asList(flightsEntity));
+
+        Collection<FlightsDto> flightsDtos = flightsService.getAllFlightByFlightId(id);
+
+        assertEquals(1, flightsDtos.size());
+        assertEquals(id, flightsDtos.iterator().next().getId());
+    }
+
+    @Test
+    public void testFlightsInNext24Hours() {
+        String origin = "New York";
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime next24Hours = now.plusHours(24);
+        FlightsEntity flightInNext24Hours = new FlightsEntity(now.plusHours(12), 100, "New York", "London");
+        FlightsEntity flightNotInNext24Hours = new FlightsEntity(now.plusDays(2), 150, "Paris", "Berlin");
+        List<FlightsEntity> flightsEntities = Arrays.asList(flightInNext24Hours, flightNotInNext24Hours);
+        when(flightsDao.getAll()).thenReturn(flightsEntities);
+
+        Collection<FlightsDto> flightsInNext24Hours = flightsService.flightsInNext24Hours(origin, now);
+
+        assertEquals(1, flightsInNext24Hours.size());
+        assertEquals(flightInNext24Hours.getDateTime(), flightsInNext24Hours.iterator().next().getDateTime());
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
