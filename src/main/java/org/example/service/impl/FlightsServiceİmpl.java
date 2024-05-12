@@ -1,15 +1,11 @@
 package org.example.service.impl;
 
 import org.example.dao.FlightsDao;
-import org.example.dao.impl.FlightsFileDao;
-import org.example.entities.BookingEntity;
 import org.example.entities.FlightsEntity;
 import org.example.model.dto.FlightsDto;
 import org.example.service.FlightsService;
-
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class FlightsServiceİmpl implements FlightsService {
     private final FlightsDao flightsDao;

@@ -3,9 +3,7 @@ package org.example.controller;
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 public class BookingController {
     private final BookingService bookingService;

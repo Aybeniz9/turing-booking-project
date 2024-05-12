@@ -7,7 +7,6 @@ import org.example.entities.BookingEntity;
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class BookingFileDao extends BookingDao {
 
@@ -28,7 +27,6 @@ public class BookingFileDao extends BookingDao {
             System.out.println("Error save bookings" + e.getMessage());
         }
     }
-
     @Override
     public void delete(long flightId, long passengerId) {
        Collection< BookingEntity> bookingForCancel = getAll();

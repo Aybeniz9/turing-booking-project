@@ -52,7 +52,6 @@ public class FlightsEntity {
         this.freeSpaces = freeSpaces;
         this.destination = destination;
     }
-
     public FlightsEntity(LocalDateTime dateTime, int freeSpaces, String destination, String origin) {
         this.dateTime = dateTime;
         this.freeSpaces = freeSpaces;

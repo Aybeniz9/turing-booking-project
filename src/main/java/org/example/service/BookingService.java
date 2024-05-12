@@ -13,5 +13,4 @@ public interface BookingService {
 
     Collection<BookingDto> getMyFlights(long flightId, String passengerNames);
     BookingDto findBookingByOne(long id);
-
 }
