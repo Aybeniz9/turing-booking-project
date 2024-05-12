@@ -35,11 +35,9 @@ public class BookingManagmentApp {
     BookingService bookingService = new BookingServiceİmpl(bookingDao);
     BookingController bookingController = new BookingController(bookingService);
     LocalDateTime dateTime = LocalDateTime.of(2024, 5, 12, 23, 45, 34);
-    LocalDateTime dateTime2 = LocalDateTime.of(2024, 5, 12, 23, 46, 35);
+    LocalDateTime dateTime2 = LocalDateTime.of(2024, 5, 12, 22, 46, 35);
     FlightsEntity flightsEntity = new FlightsEntity(dateTime, 100, "Bilasuvar", "London");
     FlightsEntity flightsEntity2 = new FlightsEntity(dateTime2, 150, "Paris", "Berlin");
-    BookingEntity bookingEntity1 = new BookingEntity(1, "Ali");
-    BookingEntity bookingEntity2 = new BookingEntity(2, "Farid");
 
 
     public void displayMainMenu() {
@@ -59,7 +57,6 @@ public class BookingManagmentApp {
             switch (choice) {
                 case 1:
                     displayOnlineBoard();
-
                     break;
                 case 2:
                     showTheFlightInfo();
@@ -119,7 +116,7 @@ public class BookingManagmentApp {
     public void displayOnlineBoard() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the location : ");
-        String location = scanner.nextLine();
+        String location = scanner.next();
         LocalDateTime dateTime = LocalDateTime.now();
         Collection<FlightsDto> flights = flightsController.getOnlineBoard(location, dateTime);
         for (FlightsDto flight : flights) {
@@ -144,18 +141,11 @@ public class BookingManagmentApp {
         }
     }
 
-    private void searchBookFlight() {
-    }
 
     public void configure() {
         FlightsDto flightsDto1 = new FlightsDto(flightsEntity.getId(), flightsEntity.getDateTime(), flightsEntity.getFreeSpaces(), flightsEntity.getDestination(), flightsEntity.getOrigin());
         FlightsDto flightsDto2 = new FlightsDto(flightsEntity2.getId(), flightsEntity2.getDateTime(), flightsEntity2.getFreeSpaces(), flightsEntity2.getDestination(), flightsEntity2.getOrigin());
         flightsService.createFlights(flightsDto1);
         flightsService.createFlights(flightsDto2);
-        BookingDto bookingDto1 = new BookingDto(bookingEntity1.getFlightId(), bookingEntity1.getPassengerName());
-        BookingDto bookingDto2 = new BookingDto(bookingEntity2.getFlightId(), bookingEntity2.getPassengerName());
-        bookingService.createBooking(bookingDto1);
-        bookingService.createBooking(bookingDto2);
-
     }
 }

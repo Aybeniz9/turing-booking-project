@@ -13,7 +13,6 @@ public class BookingDto {
     public BookingDto() {
     }
 
-    
 
     public BookingDto(long flightId, String passengerName) {
         this.passengerId = ++MAX_ID;

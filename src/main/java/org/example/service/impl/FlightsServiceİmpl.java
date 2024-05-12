@@ -31,9 +31,8 @@ public class FlightsServiceİmpl implements FlightsService {
     public Collection<FlightsDto> getAllFlight() {
         ArrayList<FlightsDto> flightsDtos = new ArrayList<>();
         Collection<FlightsEntity> flightsEntities = flightsDao.getAll();
-        flightsEntities.stream().map(flightsDto -> flightsEntities.add(new FlightsEntity(flightsDto.getDateTime(), flightsDto.getFreeSpaces(), flightsDto.getDestination(), flightsDto.getOrigin())));
+        flightsEntities.stream().map(flightsDto -> flightsDtos.add(new FlightsDto(flightsDto.getId(), flightsDto.getDateTime(), flightsDto.getFreeSpaces(), flightsDto.getDestination(), flightsDto.getOrigin()))).toList();
         return flightsDtos;
-
     }//hazir
 
     @Override
