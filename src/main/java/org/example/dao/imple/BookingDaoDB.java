@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BookingDaoDB extends BookingDao implements JdbcConnect {
     BookingEntity booking = new BookingEntity();
@@ -36,7 +37,7 @@ public class BookingDaoDB extends BookingDao implements JdbcConnect {
 
     @Override
     public void delete(long passengerId) {
-        String sql ="DELETE FROM bookings WHERE id =?";
+        String sql = "DELETE FROM bookings WHERE id =?";
 
         try {
             Connection connection = getConnection();
@@ -44,7 +45,7 @@ public class BookingDaoDB extends BookingDao implements JdbcConnect {
             ResultSet resultSet = statement.executeQuery();
             statement.setLong(1, passengerId);
             statement.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -73,7 +74,27 @@ public class BookingDaoDB extends BookingDao implements JdbcConnect {
 
     @Override
     public Optional<Collection<BookingEntity>> findAllBy(Predicate<BookingEntity> predicate) {
-        return Optional.empty();
+        String sql = "SELECT * FROM bookings";
+        List<BookingEntity> bookings = new ArrayList<>();
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                booking.setPassengerId(resultSet.getLong("id"));
+                booking.setFlightId(resultSet.getLong("flight_id"));
+                booking.setPassengerName(resultSet.getString("passenger_name"));
+
+                if (predicate.test(booking)) {
+                    bookings.add(booking);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(bookings);
     }
 
     @Override
