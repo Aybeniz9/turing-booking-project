@@ -3,6 +3,7 @@ package org.example.entities;
 import java.util.Objects;
 
 public class BookingEntity {
+
     public static long MAX_ID = 0;
     private long passengerId;
     private long flightId;
@@ -17,16 +18,18 @@ public class BookingEntity {
         this.passengerName = passengerName;
     }
 
-
     public BookingEntity(long passengerId, long flightId, String passengerName) {
         this.passengerId = passengerId;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
-
     public long getPassengerId() {
         return passengerId;
+    }
+
+    public void setPassengerId(long passengerId) {
+        this.passengerId = passengerId;
     }
 
     public long getFlightId() {
@@ -49,8 +52,9 @@ public class BookingEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookingEntity booking = (BookingEntity) o;
-        return passengerId == booking.passengerId && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
+        BookingEntity that = (BookingEntity) o;
+        return passengerId == that.passengerId && flightId ==
+                that.flightId && Objects.equals(passengerName, that.passengerName);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class BookingEntity {
         return "BookingEntity{" +
                 "passengerId=" + passengerId +
                 ", flightId=" + flightId +
-                ", passengerName=" + passengerName +
+                ", passengerName='" + passengerName + '\'' +
                 '}';
     }
 }
