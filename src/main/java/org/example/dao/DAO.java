@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.Collection;
 import java.util.Optional;
@@ -13,8 +14,9 @@ public interface DAO<T> {
 
     Collection<T> getAll();
 
-    Optional<T> findOneBy(Predicate<T> predicate);
+    Optional<T> findOneBy(long id);
 
     Optional<Collection<T>> findAllBy(Predicate<T> predicate);
+
 
 }

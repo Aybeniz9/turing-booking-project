@@ -17,7 +17,6 @@ public class BookingEntity {
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
-
     public BookingEntity(long passengerId, long flightId, String passengerName) {
         this.passengerId = passengerId;
         this.flightId = flightId;

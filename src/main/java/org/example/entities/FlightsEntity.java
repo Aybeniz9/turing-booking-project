@@ -40,12 +40,18 @@ public class FlightsEntity {
         this.id = MAX_ID++;
     }
 
-    public void setId(Long id) {
+    public FlightsEntity(long id, int freeSpaces, LocalDateTime dateTime, String destination, String origin) {
         this.id = id;
+        this.freeSpaces = freeSpaces;
+        this.dateTime = dateTime;
+        this.destination = destination;
+        this.origin = origin;
     }
-
-    public String getOrigin() {
-        return origin;
+    public FlightsEntity(int freeSpaces, LocalDateTime dateTime, String destination, String origin) {
+        this.freeSpaces = freeSpaces;
+        this.dateTime = dateTime;
+        this.destination = destination;
+        this.origin = origin;
     }
 
 
@@ -53,8 +59,8 @@ public class FlightsEntity {
         return id;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getFreeSpaces() {
@@ -65,29 +71,51 @@ public class FlightsEntity {
         this.freeSpaces = freeSpaces;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public String getDestination() {
         return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FlightsDto that)) return false;
-        return getFreeSpaces() == that.getFreeSpaces() && Objects.equals(getId(), that.getId()) && Objects.equals(getDateTime(), that.getDateTime()) && Objects.equals(getDestination(), that.getDestination());
+        if (o == null || getClass() != o.getClass()) return false;
+        FlightsEntity that = (FlightsEntity) o;
+        return id == that.id && freeSpaces == that.freeSpaces && Objects.equals(dateTime, that.dateTime) && Objects.equals(destination, that.destination) && Objects.equals(origin, that.origin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDateTime(), getFreeSpaces(), getDestination());
+        return Objects.hash(id, freeSpaces, dateTime, destination, origin);
     }
 
     @Override
     public String toString() {
-        return "FlightsDto{" +
-                "id='" + id + '\'' +
-                ", dateTime=" + dateTime +
+        return "FlightsEntity{" +
+                "id=" + id +
                 ", freeSpaces=" + freeSpaces +
+                ", dateTime=" + dateTime +
                 ", destination='" + destination + '\'' +
+                ", origin='" + origin + '\'' +
                 '}';
     }
 }
