@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 public interface DAO<T> {
 
-    void save(List<T> t) throws SQLException;
+    void save(List<T> t);
 
     void delete(long passengerId);
 
@@ -17,5 +17,6 @@ public interface DAO<T> {
     Optional<T> findOneBy(long id);
 
     Optional<Collection<T>> findAllBy(Predicate<T> predicate);
+
 
 }

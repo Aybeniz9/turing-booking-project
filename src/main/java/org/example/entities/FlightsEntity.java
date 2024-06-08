@@ -47,6 +47,13 @@ public class FlightsEntity {
         this.destination = destination;
         this.origin = origin;
     }
+    public FlightsEntity(int freeSpaces, LocalDateTime dateTime, String destination, String origin) {
+        this.freeSpaces = freeSpaces;
+        this.dateTime = dateTime;
+        this.destination = destination;
+        this.origin = origin;
+    }
+
 
     public long getId() {
         return id;
