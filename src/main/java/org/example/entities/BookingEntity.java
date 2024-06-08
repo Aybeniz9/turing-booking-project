@@ -16,17 +16,18 @@ public class BookingEntity {
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
-
-
     public BookingEntity(long passengerId, long flightId, String passengerName) {
         this.passengerId = passengerId;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
-
     public long getPassengerId() {
         return passengerId;
+    }
+
+    public void setPassengerId(long passengerId) {
+        this.passengerId = passengerId;
     }
 
     public long getFlightId() {
@@ -63,7 +64,7 @@ public class BookingEntity {
         return "BookingEntity{" +
                 "passengerId=" + passengerId +
                 ", flightId=" + flightId +
-                ", passengerName=" + passengerName +
+                ", passengerName='" + passengerName + '\'' +
                 '}';
     }
 }

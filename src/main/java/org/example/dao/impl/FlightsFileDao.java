@@ -52,9 +52,10 @@ public class FlightsFileDao extends FlightsDao {
     }
 
     @Override
-    public Optional<FlightsEntity> findOneBy(Predicate<FlightsEntity> predicate) {
-        Optional<FlightsEntity> first = getAll().stream().filter(predicate).findFirst();
-        return first;
+    public Optional<FlightsEntity> findOneBy(long id) {
+        return getAll().stream()
+                .filter(flight -> flight.getId() == id)
+                .findFirst();
     }
 
     @Override
