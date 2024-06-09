@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class BookingEntity {
     public static long MAX_ID = 0;
-    private long passengerId;
+    private long bookingID;
     private long flightId;
     private String passengerName;
 
@@ -12,22 +12,22 @@ public class BookingEntity {
     }
 
     public BookingEntity(long flightId, String passengerName) {
-        this.passengerId = ++MAX_ID;
+        this.bookingID = ++MAX_ID;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
-    public BookingEntity(long passengerId, long flightId, String passengerName) {
-        this.passengerId = passengerId;
+    public BookingEntity(long bookingID, long flightId, String passengerName) {
+        this.bookingID = bookingID;
         this.flightId = flightId;
         this.passengerName = passengerName;
     }
 
-    public long getPassengerId() {
-        return passengerId;
+    public long getBookingID() {
+        return bookingID;
     }
 
-    public void setPassengerId(long passengerId) {
-        this.passengerId = passengerId;
+    public void setBookingID(long bookingID) {
+        this.bookingID = bookingID;
     }
 
     public long getFlightId() {
@@ -51,18 +51,18 @@ public class BookingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookingEntity booking = (BookingEntity) o;
-        return passengerId == booking.passengerId && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
+        return bookingID == booking.bookingID && flightId == booking.flightId && Objects.equals(passengerName, booking.passengerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(passengerId, flightId, passengerName);
+        return Objects.hash(bookingID, flightId, passengerName);
     }
 
     @Override
     public String toString() {
         return "BookingEntity{" +
-                "passengerId=" + passengerId +
+                "passengerId=" + bookingID +
                 ", flightId=" + flightId +
                 ", passengerName='" + passengerName + '\'' +
                 '}';

@@ -55,17 +55,20 @@ public class BookingFileDao extends BookingDao {
     @Override
     public void delete(long passengerId) {
         Collection<BookingEntity> bookingForCancel = getAll();
-        bookingForCancel.removeIf(bookingEntity -> bookingEntity.getPassengerId() == passengerId);
+        bookingForCancel.removeIf(bookingEntity -> bookingEntity.getBookingID() == passengerId);
         save((List<BookingEntity>) bookingForCancel);
 
     }
     @Override
-    public Optional<BookingEntity> findOneBy(Predicate<BookingEntity> predicate) {
-        return getAll().stream().filter(predicate).findFirst();
+    public Optional<BookingEntity> findOneBy(long id) {
+        return getAll().stream()
+                .filter(booking -> booking.getBookingID() == id)
+                .findFirst();
     }
 
     @Override
     public Optional<Collection<BookingEntity>> findAllBy(Predicate<BookingEntity> predicate) {
         return Optional.of(getAll().stream().filter(predicate).findFirst().stream().toList());
     }
+
 }

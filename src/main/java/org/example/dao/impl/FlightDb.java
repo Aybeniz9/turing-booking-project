@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class FlightDb implements DAO<FlightsEntity>,FlightDaoInterfeace {
+public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
 
     Connection connection = new DbConnection().getConnection();
 
@@ -72,6 +72,7 @@ public class FlightDb implements DAO<FlightsEntity>,FlightDaoInterfeace {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 FlightsEntity flightEntity = new FlightsEntity();
+
                 flightEntity.setId(resultSet.getLong("id"));
                 flightEntity.setDateTime(resultSet.getTimestamp("departure_time").toLocalDateTime());
                 flightEntity.setFreeSpaces(resultSet.getInt("free_seats"));
@@ -89,7 +90,6 @@ public class FlightDb implements DAO<FlightsEntity>,FlightDaoInterfeace {
     public Optional<Collection<FlightsEntity>> findAllBy(Predicate<FlightsEntity> predicate) {
         final String getAllBySql = "SELECT * FROM flights";
         Collection<FlightsEntity> matchingFlights = new ArrayList<>();
-
         try (PreparedStatement statement = connection.prepareStatement(getAllBySql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

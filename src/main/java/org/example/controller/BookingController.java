@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.dto.BookingDto;
 import org.example.service.BookingService;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public class BookingController {
@@ -21,7 +22,7 @@ public class BookingController {
     }
 
 
-    public void searchAndBookFlight(BookingDto bookingDto) {
+    public void searchAndBookFlight(BookingDto bookingDto)  {
         bookingService.createBooking(bookingDto);
     }
 
