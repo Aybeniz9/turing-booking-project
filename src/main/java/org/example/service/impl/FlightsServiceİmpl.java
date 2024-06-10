@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import org.example.dao.FlightsDao;
+import org.example.dao.impl.FlightDb;
 import org.example.entities.FlightsEntity;
 import org.example.model.dto.FlightsDto;
 import org.example.service.FlightsService;
@@ -10,8 +11,8 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class FlightsServiceİmpl implements FlightsService {
-    private final FlightsDao flightsDao;
 
+    private final FlightsDao flightsDao;
     public FlightsServiceİmpl(FlightsDao flightsDao) {
         this.flightsDao = flightsDao;
     }

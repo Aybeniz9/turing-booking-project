@@ -18,7 +18,7 @@ public class BookingServiceİmpl implements BookingService {
     }
 
     @Override
-    public void createBooking(BookingDto bookingDto) {
+    public void createBooking(BookingDto bookingDto)  {
         List<BookingEntity> listForSave = new ArrayList<>();
         listForSave.add(new BookingEntity(bookingDto.getFlightId(), bookingDto.getPassengerName()));
         bookingDao.save(listForSave);
@@ -32,7 +32,7 @@ public class BookingServiceİmpl implements BookingService {
     @Override
     public Collection<BookingDto> getAllBookings() {
         return bookingDao.getAll().stream()
-                .map(booking -> new BookingDto(booking.getPassengerId(), booking.getFlightId(), booking.getPassengerName()))
+                .map(booking -> new BookingDto(booking.getBookingID(), booking.getFlightId(), booking.getPassengerName()))
                 .collect(Collectors.toList());
     }
 
@@ -40,13 +40,13 @@ public class BookingServiceİmpl implements BookingService {
     public Collection<BookingDto> getMyFlights(long flightId, String passengerNames) {
         Collection<BookingEntity> entities = bookingDao.findAllBy(bookingEntity -> bookingEntity.getFlightId() == flightId &&
                 bookingEntity.getPassengerName().equals(passengerNames)).get();
-        return entities.stream().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(),
+        return entities.stream().map(bookingEntity -> new BookingDto(bookingEntity.getBookingID(),
                 bookingEntity.getFlightId(), bookingEntity.getPassengerName())).toList();
     }
 
 
     @Override
     public BookingDto findBookingByOne(long id) {
-        return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getPassengerId() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getPassengerId(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
+        return bookingDao.getAll().stream().filter(bookingEntity -> bookingEntity.getBookingID() == id).findFirst().map(bookingEntity -> new BookingDto(bookingEntity.getBookingID(), bookingEntity.getFlightId(), bookingEntity.getPassengerName())).get();
     }
 }

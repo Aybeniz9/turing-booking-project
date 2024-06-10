@@ -1,5 +1,6 @@
 package org.example.dao.impl;
 
+import org.example.dao.BookingDao;
 import org.example.dao.DAO;
 import org.example.entities.BookingEntity;
 
@@ -7,31 +8,88 @@ import java.sql.*;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class BookingDb implements DAO<BookingEntity> {
+public class BookingDb extends BookingDao {
 
     Connection connection = new DbConnection().getConnection();
 
     @Override
-    public void save(List<BookingEntity> bokingEntities) {
+    public void save(List<BookingEntity> bookingEntities) {
+        final String insertBookings = "INSERT INTO bookings (flight_id) VALUES (?)";
+        final String insertPassengers = "INSERT INTO passengers (full_name) VALUES (?)";
+        final String insertBookingPassenger = "INSERT INTO booking_passengers (booking_id, passenger_id) VALUES (?, ?)";
 
+        try (
+                PreparedStatement bookingPs = connection.prepareStatement(insertBookings, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement passengerPs = connection.prepareStatement(insertPassengers, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement bookingPassengerPs = connection.prepareStatement(insertBookingPassenger)
+        ) {
+            connection.setAutoCommit(false);
 
+            for (BookingEntity bookingEntity : bookingEntities) {
+                bookingPs.setLong(1, bookingEntity.getFlightId());
+                bookingPs.executeUpdate();
+                ResultSet bookingRs = bookingPs.getGeneratedKeys();
+                if (bookingRs.next()) {
+                    long bookingId = bookingRs.getLong(1);
+                    String[] passengerNamesArray = bookingEntity.getPassengerName().split(",");
+                    for (String passengerName : passengerNamesArray) {
+                        passengerPs.setString(1, passengerName.trim());
+                        passengerPs.executeUpdate();
+                        ResultSet passengerRs = passengerPs.getGeneratedKeys();
+                        if (passengerRs.next()) {
+                            long passengerId = passengerRs.getLong(1);
+                            bookingPassengerPs.setLong(1, bookingId);
+                            bookingPassengerPs.setLong(2, passengerId);
+                            bookingPassengerPs.executeUpdate();
+                        }
+                    }
+                }
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackException) {
+                rollbackException.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
     @Override
     public void delete(long passengerId) {
+        final String deleteBookingPassengerSql = "DELETE FROM booking_passenger WHERE passenger_id = ?";
+        final String deleteBookingSql = "DELETE FROM bookings WHERE id = ?";
         try {
-            final String deleteBookingPassengerSql = "DELETE FROM booking_passenger WHERE booking_id = ?";
+            connection.setAutoCommit(false);
             try (PreparedStatement statement = connection.prepareStatement(deleteBookingPassengerSql)) {
                 statement.setLong(1, passengerId);
                 statement.executeUpdate();
             }
-            String deleteBookingSql = "DELETE FROM bookings WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(deleteBookingSql)) {
                 statement.setLong(1, passengerId);
                 statement.executeUpdate();
             }
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException autoCommitEx) {
+                autoCommitEx.printStackTrace();
+            }
         }
     }
 
@@ -61,7 +119,6 @@ public class BookingDb implements DAO<BookingEntity> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return new ArrayList<>(bookingMap.values());
     }
 

@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.dto.BookingDto;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public interface BookingService {

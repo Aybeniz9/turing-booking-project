@@ -1,6 +1,7 @@
 package org.example.dao.impl;
 
 import org.example.dao.DAO;
+import org.example.dao.FlightsDao;
 import org.example.entities.FlightsEntity;
 
 import java.sql.*;
@@ -10,10 +11,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
+public class FlightDb extends FlightsDao implements FlightDaoInterfeace {
 
     Connection connection = new DbConnection().getConnection();
-
     @Override
     public void save(List<FlightsEntity> flightsEntities) {
         final String flightsave = "INSERT INTO flights(departure_time,free_seats,destination,origin) VALUES (?,?,?,?)";
@@ -30,7 +30,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
             e.printStackTrace();
         }
     }
-
     @Override
     public void delete(long passengerId) {
         final String deleteflights = "DELETE FROM flights WHERE id = ?";
@@ -42,7 +41,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
         }
 
     }
-
     @Override
     public Collection<FlightsEntity> getAll() {
         final String sql = "SELECT * FROM flights";
@@ -63,7 +61,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
         }
         return flightEntities;
     }
-
     @Override
     public Optional<FlightsEntity> findOneBy(long id) {
         final String sql = "SELECT * FROM flights WHERE id = ?";
@@ -85,7 +82,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
         }
         return Optional.empty();
     }
-
     @Override
     public Optional<Collection<FlightsEntity>> findAllBy(Predicate<FlightsEntity> predicate) {
         final String getAllBySql = "SELECT * FROM flights";
@@ -108,7 +104,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
         }
         return matchingFlights.isEmpty() ? Optional.empty() : Optional.of(matchingFlights);
     }
-
     @Override
     public void update(long passengerId, int seats) {
         final String sqlSeats = "SELECT free_seats FROM flights WHERE id = ?";
@@ -151,9 +146,6 @@ public class FlightDb implements DAO<FlightsEntity>, FlightDaoInterfeace {
                 }
             }
         }
-
     }
-
-
 }
 
